@@ -31,3 +31,19 @@ func maxArea(height []int) int {
 
 	return max
 }
+
+// 283. 移动零
+// https://leetcode.cn/problems/move-zeroes/
+func moveZeroes(nums []int) {
+	if nums == nil || len(nums) == 0 {
+		return
+	}
+
+	slow, fast := 0, 0
+	for ; fast < len(nums); fast++ {
+		if nums[fast] != 0 {
+			nums[slow], nums[fast] = nums[fast], nums[slow]
+			slow++
+		}
+	}
+}

@@ -23,8 +23,43 @@ func TestMaxArea(t *testing.T) {
 	}
 }
 
+var (
+	moveZeroesBefore = [][]int{
+		{1, 0, 3, 0, 1, 2, 4},
+		{0, 1, 0, 3, 12},
+		{0},
+	}
+	moveZeroesAfter = [][]int{
+		{1, 3, 1, 2, 4, 0, 0},
+		{1, 3, 12, 0, 0},
+		{0},
+	}
+)
+
+func TestMoveZeroes(t *testing.T) {
+	for i := range moveZeroesBefore {
+		moveZeroes(moveZeroesBefore[i])
+		verifyArr(t, i, moveZeroesBefore[i], moveZeroesAfter[i])
+	}
+}
+
 func verify(t *testing.T, caseIndex int, result int, actual int) {
 	if result != actual {
-		t.Fatal(fmt.Sprintf("结果与实际值不同, caseIndex: %d, result: %d, actual: %d", caseIndex, result, actual))
+		t.Fatal(fmt.Sprintf("结果与实际值不同, caseIndex: %d, result: %d, actual: %d",
+			caseIndex, result, actual))
+	}
+}
+
+func verifyArr(t *testing.T, caseIndex int, result []int, actual []int) {
+	if len(result) != len(actual) {
+		t.Fatal(fmt.Sprintf("len must be equal, resultLen: %d, actualLen: %d",
+			len(result), len(actual)))
+	}
+
+	for i := range actual {
+		if result[i] != actual[i] {
+			t.Fatal(fmt.Sprintf("结果与实际值不同, caseIndex: %d, result: %d, actual: %d, i: %d",
+				caseIndex, result, actual, i))
+		}
 	}
 }
