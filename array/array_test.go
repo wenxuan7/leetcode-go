@@ -43,6 +43,17 @@ func TestMoveZeroes(t *testing.T) {
 	}
 }
 
+var (
+	climbStairsBefore = [...]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}
+	climbStairsAfter  = [...]int{1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610}
+)
+
+func TestClimbStairs(t *testing.T) {
+	for i := range climbStairsBefore {
+		verify(t, i, climbStairs(climbStairsBefore[i]), climbStairsAfter[i])
+	}
+}
+
 func verify(t *testing.T, caseIndex int, result int, actual int) {
 	if result != actual {
 		t.Fatal(fmt.Sprintf("结果与实际值不同, caseIndex: %d, result: %d, actual: %d",
