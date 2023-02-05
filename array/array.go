@@ -1,5 +1,9 @@
 package array
 
+import (
+	"sort"
+)
+
 // 11. 盛最多水的容器
 // https://leetcode.cn/problems/container-with-most-water/
 func maxArea(height []int) int {
@@ -65,4 +69,47 @@ func climbStairs(n int) int {
 	}
 
 	return dp[1]
+}
+
+// 15. 三数之和
+// https://leetcode.cn/problems/3sum/
+func threeSum(nums []int) [][]int {
+	l := len(nums)
+	sort.Ints(nums)
+
+	ans := make([][]int, 0, l)
+
+	for i := 0; i < l; i++ {
+		if nums[i] > 0 {
+			return ans
+		}
+
+		if i > 0 && nums[i] == nums[i-1] {
+			continue
+		}
+
+		for j, k := i+1, l-1; j < k; {
+			target := nums[j] + nums[k] + nums[i]
+
+			if target > 0 {
+				k--
+			} else if target < 0 {
+				j++
+			} else {
+				ans = append(ans, []int{nums[i], nums[j], nums[k]})
+				j++
+				k--
+
+				for j < k && nums[j] == nums[j-1] {
+					j++
+				}
+
+				for j < k && nums[k] == nums[k+1] {
+					k--
+				}
+			}
+		}
+	}
+
+	return ans
 }

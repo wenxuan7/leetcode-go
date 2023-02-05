@@ -54,6 +54,21 @@ func TestClimbStairs(t *testing.T) {
 	}
 }
 
+var (
+	threeSumData = [][]int{
+		{-1, 0, 1, 2, -1, -4},
+	}
+	threeSumActual = [][][]int{
+		{{-1, -1, 2}, {-1, 0, 1}},
+	}
+)
+
+func TestThreeSum(t *testing.T) {
+	for i := range threeSumData {
+		verifySecArr(t, i, threeSum(threeSumData[i]), threeSumActual[i])
+	}
+}
+
 func verify(t *testing.T, caseIndex int, result int, actual int) {
 	if result != actual {
 		t.Fatal(fmt.Sprintf("结果与实际值不同, caseIndex: %d, result: %d, actual: %d",
@@ -63,14 +78,30 @@ func verify(t *testing.T, caseIndex int, result int, actual int) {
 
 func verifyArr(t *testing.T, caseIndex int, result []int, actual []int) {
 	if len(result) != len(actual) {
-		t.Fatal(fmt.Sprintf("len must be equal, resultLen: %d, actualLen: %d",
-			len(result), len(actual)))
+		t.Fatal(fmt.Sprintf("len must be equal, result: %v, resultLen: %d, actual: %v, actualLen: %d",
+			result, len(result), actual, len(actual)))
 	}
 
 	for i := range actual {
 		if result[i] != actual[i] {
 			t.Fatal(fmt.Sprintf("结果与实际值不同, caseIndex: %d, result: %d, actual: %d, i: %d",
 				caseIndex, result, actual, i))
+		}
+	}
+}
+
+func verifySecArr(t *testing.T, caseIndex int, result [][]int, actual [][]int) {
+	if len(result) != len(actual) {
+		t.Fatal(fmt.Sprintf("len must be equal, result: %v, resultLen: %d, actual: %v, actualLen: %d",
+			result, len(result), actual, len(actual)))
+	}
+
+	for i := range actual {
+		for j := range actual[i] {
+			if actual[i][j] != result[i][j] {
+				t.Fatal(fmt.Sprintf("结果与实际值不同, caseIndex: %d, result: %v, actual: %v, i: %d",
+					caseIndex, result, actual, i))
+			}
 		}
 	}
 }
