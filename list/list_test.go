@@ -21,11 +21,11 @@ var (
 
 func TestReverseList(t *testing.T) {
 	for i := range reverseListData {
-		verify(t, i, reverseList(listGenerator(reverseListData[i])), listGenerator(reverseListActual[i]))
+		verify(t, i, reverseList(generateList(reverseListData[i])), generateList(reverseListActual[i]))
 	}
 }
 
-func listGenerator(num []int) *ListNode {
+func generateList(num []int) *ListNode {
 	if num == nil || len(num) == 0 {
 		return nil
 	}
