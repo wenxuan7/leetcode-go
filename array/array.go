@@ -1,8 +1,6 @@
 package array
 
-import (
-	"sort"
-)
+import "sort"
 
 // 11. 盛最多水的容器
 // https://leetcode.cn/problems/container-with-most-water/
@@ -74,12 +72,22 @@ func climbStairs(n int) int {
 // 15. 三数之和
 // https://leetcode.cn/problems/3sum/
 func threeSum(nums []int) [][]int {
+	if nums == nil {
+		return [][]int{}
+	}
+
 	l := len(nums)
+	if l < 3 {
+		return [][]int{}
+	}
+
 	sort.Ints(nums)
+	if nums[l-1] < 0 {
+		return [][]int{}
+	}
 
-	ans := make([][]int, 0, l)
-
-	for i := 0; i < l; i++ {
+	var ans [][]int
+	for i := range nums {
 		if nums[i] > 0 {
 			return ans
 		}
