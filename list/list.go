@@ -48,3 +48,37 @@ func hasCycle(head *ListNode) bool {
 
 	return false
 }
+
+// detectCycle
+// 142. 环形链表 II
+// https://leetcode.cn/problems/linked-list-cycle-ii/
+func detectCycle(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return nil
+	}
+
+	fast, slow := head, head
+	for fast != nil && fast.Next != nil {
+		fast = fast.Next.Next
+		slow = slow.Next
+
+		if slow == fast {
+			break
+		}
+	}
+
+	if slow != fast {
+		return nil
+	}
+
+	slow = head
+	for fast != nil {
+		if slow == fast {
+			break
+		}
+		fast = fast.Next
+		slow = slow.Next
+	}
+
+	return fast
+}

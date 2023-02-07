@@ -50,7 +50,7 @@ var (
 		{1, 2},
 		{3, 2, 0, -4},
 	}
-	pos = []int{
+	hasCyclePos = []int{
 		1,
 		0,
 		-1,
@@ -65,12 +65,58 @@ var (
 
 func TestHasCycle(t *testing.T) {
 	for i := range hasCycleData {
-		result := hasCycle(generateCycleList(hasCycleData[i], pos[i]))
+		result := hasCycle(generateCycleList(hasCycleData[i], hasCyclePos[i]))
 		if result != hasCycleActual[i] {
 			t.Fatal(fmt.Sprintf("结果与实际不相符, caseIndex: %d, result: %v, actual: %v",
 				i, result, hasCycleActual[i]))
 		}
 	}
+}
+
+var (
+	detectCycleData = [][]int{
+		{3, 2, 0, -4},
+		{1, 2},
+		{},
+		{1},
+	}
+	detectCyclePos = []int{
+		1,
+		0,
+		0,
+		-1,
+	}
+)
+
+func TestDetectCycle(t *testing.T) {
+	for i := range detectCycleData {
+		head := generateCycleList(detectCycleData[i], detectCyclePos[i])
+		result := detectCycle(head)
+		actual := getListNode(head, detectCyclePos[i])
+
+		if result != actual {
+			t.Fatal(fmt.Sprintf("结果与实际不相符, caseIndex: %d, result: %d, actual: %d",
+				i, result.Val, actual.Val))
+		}
+	}
+}
+
+// getListNode 根据索引获取链表节点
+func getListNode(head *ListNode, i int) *ListNode {
+	var (
+		count = 0
+		curr  = head
+	)
+
+	for curr != nil {
+		if count == i {
+			return curr
+		}
+		curr = curr.Next
+		count++
+	}
+
+	return nil
 }
 
 func generateCycleList(num []int, pos int) *ListNode {
