@@ -44,6 +44,68 @@ func TestSwapPairs(t *testing.T) {
 	}
 }
 
+var (
+	hasCycleData = [][]int{
+		{3, 2, 0, -4},
+		{1, 2},
+		{3, 2, 0, -4},
+	}
+	pos = []int{
+		1,
+		0,
+		-1,
+	}
+	hasCycleActual = []bool{
+		true,
+		true,
+		false,
+		false,
+	}
+)
+
+func TestHasCycle(t *testing.T) {
+	for i := range hasCycleData {
+		result := hasCycle(generateCycleList(hasCycleData[i], pos[i]))
+		if result != hasCycleActual[i] {
+			t.Fatal(fmt.Sprintf("结果与实际不相符, caseIndex: %d, result: %v, actual: %v",
+				i, result, hasCycleActual[i]))
+		}
+	}
+}
+
+func generateCycleList(num []int, pos int) *ListNode {
+	if num == nil || len(num) == 0 {
+		return nil
+	}
+
+	var (
+		preHead = &ListNode{}
+		pre     = preHead
+		curr    *ListNode
+		posNode *ListNode
+		tail    *ListNode
+	)
+
+	for i := range num {
+		curr = &ListNode{Val: num[i], Next: nil}
+		pre.Next = curr
+		pre = curr
+
+		if i == pos {
+			posNode = curr
+		}
+		if i == len(num)-1 {
+			tail = curr
+		}
+	}
+
+	if posNode != nil {
+		tail.Next = posNode
+	}
+
+	return preHead.Next
+}
+
 func generateList(num []int) *ListNode {
 	if num == nil || len(num) == 0 {
 		return nil

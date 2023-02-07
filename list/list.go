@@ -31,3 +31,20 @@ func swapPairs(head *ListNode) *ListNode {
 	next.Next = head
 	return next
 }
+
+// hasCycle
+// 141. 环形链表
+// https://leetcode.cn/problems/linked-list-cycle/
+func hasCycle(head *ListNode) bool {
+	fast, slow := head, head
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+
+		if slow == fast {
+			return true
+		}
+	}
+
+	return false
+}
