@@ -119,6 +119,7 @@ func getListNode(head *ListNode, i int) *ListNode {
 	return nil
 }
 
+// generateCycleList 生成环形链表， pos为成环索引位置
 func generateCycleList(num []int, pos int) *ListNode {
 	if num == nil || len(num) == 0 {
 		return nil
@@ -152,6 +153,7 @@ func generateCycleList(num []int, pos int) *ListNode {
 	return preHead.Next
 }
 
+// generateList 生成链表，返回头节点
 func generateList(num []int) *ListNode {
 	if num == nil || len(num) == 0 {
 		return nil
@@ -172,6 +174,7 @@ func generateList(num []int) *ListNode {
 	return preHead.Next
 }
 
+// listToString 链表转字符串做格式化输出
 func listToString(node *ListNode) string {
 	bd := strings.Builder{}
 	bd.WriteString("[")
@@ -187,6 +190,7 @@ func listToString(node *ListNode) string {
 	return bd.String()
 }
 
+// verify 校验两个链表的全部节点值是否相等
 func verify(t *testing.T, caseIndex int, result *ListNode, actual *ListNode) {
 	if result == nil && actual == nil {
 		return

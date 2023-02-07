@@ -69,6 +69,7 @@ func TestThreeSum(t *testing.T) {
 	}
 }
 
+// verify 校验值是否相等
 func verify(t *testing.T, caseIndex int, result int, actual int) {
 	if result != actual {
 		t.Fatal(fmt.Sprintf("结果与实际值不同, caseIndex: %d, result: %d, actual: %d",
@@ -76,6 +77,7 @@ func verify(t *testing.T, caseIndex int, result int, actual int) {
 	}
 }
 
+// verifyArr 校验数组全部值是否相等
 func verifyArr(t *testing.T, caseIndex int, result []int, actual []int) {
 	if len(result) != len(actual) {
 		t.Fatal(fmt.Sprintf("len must be equal, result: %v, resultLen: %d, actual: %v, actualLen: %d",
@@ -90,6 +92,7 @@ func verifyArr(t *testing.T, caseIndex int, result []int, actual []int) {
 	}
 }
 
+// verifySecArr 校验二维数组全部值是否相等
 func verifySecArr(t *testing.T, caseIndex int, result [][]int, actual [][]int) {
 	if len(result) != len(actual) {
 		t.Fatal(fmt.Sprintf("len must be equal, result: %v, resultLen: %d, actual: %v, actualLen: %d",
