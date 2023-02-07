@@ -25,6 +25,25 @@ func TestReverseList(t *testing.T) {
 	}
 }
 
+var (
+	swapPairsData = [][]int{
+		{1, 2, 3, 4},
+		{},
+		{1, 2, 3},
+	}
+	swapPairsActual = [][]int{
+		{2, 1, 4, 3},
+		{},
+		{2, 1, 3},
+	}
+)
+
+func TestSwapPairs(t *testing.T) {
+	for i := range swapPairsData {
+		verify(t, i, swapPairs(generateList(swapPairsData[i])), generateList(swapPairsActual[i]))
+	}
+}
+
 func generateList(num []int) *ListNode {
 	if num == nil || len(num) == 0 {
 		return nil
@@ -64,8 +83,14 @@ func verify(t *testing.T, caseIndex int, result *ListNode, actual *ListNode) {
 	if result == nil && actual == nil {
 		return
 	} else if result != nil && actual != nil {
+		if result.Val != actual.Val {
+			t.Fatal(fmt.Sprintf("结果与实际不相符, caseIndex: %d, result: %s, actual: %s",
+				caseIndex, listToString(result), listToString(actual)))
+		}
 
+		verify(t, caseIndex, result.Next, actual.Next)
 	} else {
-		t.Fatal(fmt.Sprintf("结果与实际不相符, caseIndex: %d, result: %s, actual: %s", caseIndex, listToString(result), listToString(actual)))
+		t.Fatal(fmt.Sprintf("结果与实际不相符, caseIndex: %d, result: %s, actual: %s",
+			caseIndex, listToString(result), listToString(actual)))
 	}
 }
