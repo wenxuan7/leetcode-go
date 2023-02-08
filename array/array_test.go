@@ -170,6 +170,31 @@ func TestMerge(t *testing.T) {
 	}
 }
 
+var (
+	twoSumData = [][]int{
+		{},
+		{1, 2, 3, 4, 5, 6},
+		{1, 2, 3, 4, 5, 6},
+	}
+	twoSumTarget = []int{
+		1,
+		9,
+		12,
+	}
+	twoSumActual = [][]int{
+		{},
+		{3, 4},
+		{},
+	}
+)
+
+func TestTwoSum(t *testing.T) {
+	for i := range twoSumData {
+		result := twoSum(twoSumData[i], twoSumTarget[i])
+		verifyArr(t, i, result, twoSumActual[i])
+	}
+}
+
 // verify 校验值是否相等
 func verify(t *testing.T, caseIndex int, result int, actual int) {
 	if result != actual {

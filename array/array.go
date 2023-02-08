@@ -198,3 +198,20 @@ func merge(nums1 []int, m int, nums2 []int, n int) {
 		n1--
 	}
 }
+
+// twoSum
+// 1. 两数之和
+// https://leetcode.cn/problems/two-sum/
+func twoSum(nums []int, target int) []int {
+	numToI := make(map[int]int, len(nums))
+	for i, v := range nums {
+		numsI, ok := numToI[target-v]
+		if ok {
+			return []int{numsI, i}
+		}
+
+		numToI[v] = i
+	}
+
+	return []int{}
+}
