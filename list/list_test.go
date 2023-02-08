@@ -136,6 +136,34 @@ func TestReverseKGroup(t *testing.T) {
 	}
 }
 
+var (
+	mergeTwoListsData1 = [][]int{
+		{},
+		{},
+		{1},
+		{1, 3, 4, 6},
+	}
+	mergeTwoListsData2 = [][]int{
+		{},
+		{1},
+		{},
+		{2, 5},
+	}
+	mergeTwoListsActual = [][]int{
+		{},
+		{1},
+		{1},
+		{1, 2, 3, 4, 5, 6},
+	}
+)
+
+func TestMergeTwoLists(t *testing.T) {
+	for i := range mergeTwoListsData1 {
+		result := mergeTwoLists(generateList(mergeTwoListsData1[i]), generateList(mergeTwoListsData2[i]))
+		verify(t, i, result, generateList(mergeTwoListsActual[i]))
+	}
+}
+
 // getListNode 根据索引获取链表节点
 func getListNode(head *ListNode, i int) *ListNode {
 	var (
