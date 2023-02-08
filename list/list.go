@@ -1,6 +1,9 @@
 package list
 
-import . "leetcode-go/data"
+import (
+	"container/list"
+	. "leetcode-go/data"
+)
 
 // reverseList
 // 206. 反转链表
@@ -78,4 +81,36 @@ func detectCycle(head *ListNode) *ListNode {
 	}
 
 	return fast
+}
+
+// reverseKGroup
+// 25. K 个一组翻转链表
+// https://leetcode.cn/problems/reverse-nodes-in-k-group/
+func reverseKGroup(head *ListNode, k int) *ListNode {
+	if head == nil || k < 2 {
+		return head
+	}
+
+	ls, curr := list.New(), head
+	for i := 0; i < k; i++ {
+		if curr == nil {
+			return head
+		}
+
+		ls.PushBack(curr)
+		curr = curr.Next
+	}
+
+	groupNext := reverseKGroup(curr, k)
+	pre := groupNext
+
+	for ls.Len() > 0 {
+		element := ls.Front()
+		front := element.Value.(*ListNode)
+		front.Next = pre
+		pre = front
+		ls.Remove(element)
+	}
+
+	return pre
 }

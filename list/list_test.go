@@ -101,6 +101,41 @@ func TestDetectCycle(t *testing.T) {
 	}
 }
 
+var (
+	reverseKGroupData = [][]int{
+		{},
+		{1},
+		{1, 2},
+		{1, 2, 3},
+		{1, 2, 3, 4},
+		{1, 2, 3, 4},
+	}
+
+	reverseKGroupK = []int{
+		2,
+		2,
+		2,
+		2,
+		2,
+		4,
+	}
+	reverseKGroupActual = [][]int{
+		{},
+		{1},
+		{2, 1},
+		{2, 1, 3},
+		{2, 1, 4, 3},
+		{4, 3, 2, 1},
+	}
+)
+
+func TestReverseKGroup(t *testing.T) {
+	for i := range reverseKGroupData {
+		result := reverseKGroup(generateList(reverseKGroupData[i]), reverseKGroupK[i])
+		verify(t, i, result, generateList(reverseKGroupActual[i]))
+	}
+}
+
 // getListNode 根据索引获取链表节点
 func getListNode(head *ListNode, i int) *ListNode {
 	var (
