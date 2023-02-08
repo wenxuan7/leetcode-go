@@ -119,6 +119,57 @@ func TestRotate(t *testing.T) {
 	}
 }
 
+var (
+	mergeData1 = [][]int{
+		{},
+		{0},
+		{1},
+		{1, 3, 4, 6, 7, 0, 0, 0},
+		{8, 9, 10, 0, 0, 0},
+		{1, 3, 4, 0, 0, 0},
+	}
+	mergeM = []int{
+		0,
+		0,
+		1,
+		5,
+		3,
+		3,
+	}
+	mergeData2 = [][]int{
+		{},
+		{1},
+		{0},
+		{8, 9, 10},
+		{1, 2, 3},
+		{2, 5, 8},
+	}
+	mergeN = []int{
+		0,
+		1,
+		0,
+		3,
+		3,
+		3,
+	}
+
+	mergeActual = [][]int{
+		{},
+		{1},
+		{1},
+		{1, 3, 4, 6, 7, 8, 9, 10},
+		{1, 2, 3, 8, 9, 10},
+		{1, 2, 3, 4, 5, 8},
+	}
+)
+
+func TestMerge(t *testing.T) {
+	for i := range mergeData1 {
+		merge(mergeData1[i], mergeM[i], mergeData2[i], mergeN[i])
+		verifyArr(t, i, mergeData1[i], mergeActual[i])
+	}
+}
+
 // verify 校验值是否相等
 func verify(t *testing.T, caseIndex int, result int, actual int) {
 	if result != actual {

@@ -170,3 +170,31 @@ func rotateAll(nums []int) {
 		r--
 	}
 }
+
+// merge
+// 88. 合并两个有序数组
+// https://leetcode.cn/problems/merge-sorted-array/
+func merge(nums1 []int, m int, nums2 []int, n int) {
+	if n < 1 {
+		return
+	}
+
+	m1, n1, i := m-1, n-1, len(nums1)-1
+	for m1 >= 0 && n1 >= 0 {
+		if nums1[m1] > nums2[n1] {
+			nums1[i] = nums1[m1]
+			i--
+			m1--
+		} else {
+			nums1[i] = nums2[n1]
+			i--
+			n1--
+		}
+	}
+
+	for n1 >= 0 {
+		nums1[i] = nums2[n1]
+		i--
+		n1--
+	}
+}
