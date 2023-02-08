@@ -145,3 +145,28 @@ func removeDuplicates(nums []int) int {
 
 	return slow
 }
+
+// rotate
+// 189. 轮转数组
+// https://leetcode.cn/problems/rotate-array/
+func rotate(nums []int, k int) {
+	if k < 1 || nums == nil ||
+		len(nums) == 0 {
+		return
+	}
+
+	k %= len(nums)
+	rotateAll(nums)
+	rotateAll(nums[0:k])
+	rotateAll(nums[k:])
+}
+
+func rotateAll(nums []int) {
+	l, r := 0, len(nums)-1
+
+	for l < r {
+		nums[l], nums[r] = nums[r], nums[l]
+		l++
+		r--
+	}
+}

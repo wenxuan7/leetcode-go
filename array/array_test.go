@@ -91,6 +91,34 @@ func TestRemoveDuplicates(t *testing.T) {
 	}
 }
 
+var (
+	rotateData = [][]int{
+		{},
+		{1, 2},
+		{1, 2, 3, 4, 5},
+		{1, 2, 3, 4, 5},
+	}
+	rotateK = []int{
+		1,
+		-1,
+		2,
+		7,
+	}
+	rotateActual = [][]int{
+		{},
+		{1, 2},
+		{4, 5, 1, 2, 3},
+		{4, 5, 1, 2, 3},
+	}
+)
+
+func TestRotate(t *testing.T) {
+	for i := range rotateData {
+		rotate(rotateData[i], rotateK[i])
+		verifyArr(t, i, rotateData[i], rotateActual[i])
+	}
+}
+
 // verify 校验值是否相等
 func verify(t *testing.T, caseIndex int, result int, actual int) {
 	if result != actual {
