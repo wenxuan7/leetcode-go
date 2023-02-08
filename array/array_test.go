@@ -195,6 +195,30 @@ func TestTwoSum(t *testing.T) {
 	}
 }
 
+var (
+	plusOneData = [][]int{
+		{},
+		{1, 2, 3},
+		{0},
+		{1, 2, 9},
+		{9, 9, 9},
+	}
+	plusOneActual = [][]int{
+		{},
+		{1, 2, 4},
+		{1},
+		{1, 3, 0},
+		{1, 0, 0, 0},
+	}
+)
+
+func TestPlusOne(t *testing.T) {
+	for i := range plusOneData {
+		result := plusOne(plusOneData[i])
+		verifyArr(t, i, result, plusOneActual[i])
+	}
+}
+
 // verify 校验值是否相等
 func verify(t *testing.T, caseIndex int, result int, actual int) {
 	if result != actual {
