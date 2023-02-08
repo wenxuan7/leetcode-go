@@ -69,6 +69,28 @@ func TestThreeSum(t *testing.T) {
 	}
 }
 
+var (
+	removeDuplicatesData = [][]int{
+		{1, 1, 1, 1},
+		{},
+		{1},
+		{1, 1, 2, 2, 3, 4, 5, 5, 6},
+	}
+	removeDuplicatesActual = [][]int{
+		{1},
+		{},
+		{1},
+		{1, 2, 3, 4, 5, 6},
+	}
+)
+
+func TestRemoveDuplicates(t *testing.T) {
+	for i := range removeDuplicatesData {
+		result := removeDuplicates(removeDuplicatesData[i])
+		verifyArr(t, i, removeDuplicatesData[i][:result], removeDuplicatesActual[i])
+	}
+}
+
 // verify 校验值是否相等
 func verify(t *testing.T, caseIndex int, result int, actual int) {
 	if result != actual {

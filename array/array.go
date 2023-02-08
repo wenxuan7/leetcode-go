@@ -121,3 +121,27 @@ func threeSum(nums []int) [][]int {
 
 	return ans
 }
+
+// removeDuplicates
+// 26. 删除有序数组中的重复项
+// https://leetcode.cn/problems/remove-duplicates-from-sorted-array/
+func removeDuplicates(nums []int) int {
+	if nums == nil || len(nums) == 0 {
+		return 0
+	}
+
+	if len(nums) < 2 {
+		return 1
+	}
+
+	fast, slow := 1, 1
+	for fast < len(nums) {
+		if nums[fast] != nums[slow-1] {
+			nums[slow], nums[fast] = nums[fast], nums[slow]
+			slow++
+		}
+		fast++
+	}
+
+	return slow
+}
