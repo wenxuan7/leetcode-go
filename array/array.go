@@ -223,20 +223,23 @@ func plusOne(digits []int) []int {
 		return []int{}
 	}
 
-	digits[len(digits)-1]++
+	ans := make([]int, len(digits))
+	copy(ans, digits)
+
+	ans[len(ans)-1]++
 	remain := 0
 
-	for i := len(digits) - 1; i >= 0; i-- {
-		num := digits[i] + remain
+	for i := len(ans) - 1; i >= 0; i-- {
+		num := ans[i] + remain
 		remain = (num) / 10
-		digits[i] = num % 10
+		ans[i] = num % 10
 	}
 
 	if remain > 0 {
-		ans := make([]int, len(digits)+1)
-		copy(ans[1:], digits)
-		ans[0] = remain
-		return ans
+		newAns := make([]int, len(ans)+1)
+		copy(newAns[1:], ans)
+		newAns[0] = remain
+		return newAns
 	}
-	return digits
+	return ans
 }
