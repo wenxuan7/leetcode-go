@@ -2,6 +2,7 @@ package array
 
 import "sort"
 
+// maxArea
 // 11. 盛最多水的容器
 // https://leetcode.cn/problems/container-with-most-water/
 func maxArea(height []int) int {
@@ -34,6 +35,7 @@ func maxArea(height []int) int {
 	return max
 }
 
+// moveZeroes
 // 283. 移动零
 // https://leetcode.cn/problems/move-zeroes/
 func moveZeroes(nums []int) {
@@ -50,6 +52,7 @@ func moveZeroes(nums []int) {
 	}
 }
 
+// climbStairs
 // 70. 爬楼梯
 // https://leetcode.cn/problems/climbing-stairs/
 func climbStairs(n int) int {
@@ -69,6 +72,7 @@ func climbStairs(n int) int {
 	return dp[1]
 }
 
+// threeSum
 // 15. 三数之和
 // https://leetcode.cn/problems/3sum/
 func threeSum(nums []int) [][]int {
@@ -216,6 +220,7 @@ func twoSum(nums []int, target int) []int {
 	return []int{}
 }
 
+// plusOne
 // 66. 加一
 // https://leetcode.cn/problems/plus-one/
 func plusOne(digits []int) []int {
