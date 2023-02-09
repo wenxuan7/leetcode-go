@@ -1,7 +1,6 @@
 package array
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -222,22 +221,22 @@ func TestPlusOne(t *testing.T) {
 // verify 校验值是否相等
 func verify(t *testing.T, caseIndex int, result int, actual int) {
 	if result != actual {
-		t.Fatal(fmt.Sprintf("结果与实际值不同, caseIndex: %d, result: %d, actual: %d",
-			caseIndex, result, actual))
+		t.Fatalf("结果与实际值不同, caseIndex: %d, result: %d, actual: %d",
+			caseIndex, result, actual)
 	}
 }
 
 // verifyArr 校验数组全部值是否相等
 func verifyArr(t *testing.T, caseIndex int, result []int, actual []int) {
 	if len(result) != len(actual) {
-		t.Fatal(fmt.Sprintf("len must be equal, result: %v, resultLen: %d, actual: %v, actualLen: %d",
-			result, len(result), actual, len(actual)))
+		t.Fatalf("len must be equal, result: %v, resultLen: %d, actual: %v, actualLen: %d",
+			result, len(result), actual, len(actual))
 	}
 
 	for i := range actual {
 		if result[i] != actual[i] {
-			t.Fatal(fmt.Sprintf("结果与实际值不同, caseIndex: %d, result: %d, actual: %d, i: %d",
-				caseIndex, result, actual, i))
+			t.Fatalf("结果与实际值不同, caseIndex: %d, result: %d, actual: %d, i: %d",
+				caseIndex, result, actual, i)
 		}
 	}
 }
@@ -245,15 +244,15 @@ func verifyArr(t *testing.T, caseIndex int, result []int, actual []int) {
 // verifySecArr 校验二维数组全部值是否相等
 func verifySecArr(t *testing.T, caseIndex int, result [][]int, actual [][]int) {
 	if len(result) != len(actual) {
-		t.Fatal(fmt.Sprintf("len must be equal, result: %v, resultLen: %d, actual: %v, actualLen: %d",
-			result, len(result), actual, len(actual)))
+		t.Fatalf("len must be equal, result: %v, resultLen: %d, actual: %v, actualLen: %d",
+			result, len(result), actual, len(actual))
 	}
 
 	for i := range actual {
 		for j := range actual[i] {
 			if actual[i][j] != result[i][j] {
-				t.Fatal(fmt.Sprintf("结果与实际值不同, caseIndex: %d, result: %v, actual: %v, i: %d",
-					caseIndex, result, actual, i))
+				t.Fatalf("结果与实际值不同, caseIndex: %d, result: %v, actual: %v, i: %d",
+					caseIndex, result, actual, i)
 			}
 		}
 	}

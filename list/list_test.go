@@ -1,7 +1,6 @@
 package list
 
 import (
-	"fmt"
 	. "leetcode-go/data"
 	"strconv"
 	"strings"
@@ -67,8 +66,8 @@ func TestHasCycle(t *testing.T) {
 	for i := range hasCycleData {
 		result := hasCycle(generateCycleList(hasCycleData[i], hasCyclePos[i]))
 		if result != hasCycleActual[i] {
-			t.Fatal(fmt.Sprintf("结果与实际不相符, caseIndex: %d, result: %v, actual: %v",
-				i, result, hasCycleActual[i]))
+			t.Fatalf("结果与实际不相符, caseIndex: %d, result: %v, actual: %v",
+				i, result, hasCycleActual[i])
 		}
 	}
 }
@@ -95,8 +94,8 @@ func TestDetectCycle(t *testing.T) {
 		actual := getListNode(head, detectCyclePos[i])
 
 		if result != actual {
-			t.Fatal(fmt.Sprintf("结果与实际不相符, caseIndex: %d, result: %d, actual: %d",
-				i, result.Val, actual.Val))
+			t.Fatalf("结果与实际不相符, caseIndex: %d, result: %d, actual: %d",
+				i, result.Val, actual.Val)
 		}
 	}
 }
@@ -259,13 +258,13 @@ func verify(t *testing.T, caseIndex int, result *ListNode, actual *ListNode) {
 		return
 	} else if result != nil && actual != nil {
 		if result.Val != actual.Val {
-			t.Fatal(fmt.Sprintf("结果与实际不相符, caseIndex: %d, result: %s, actual: %s",
-				caseIndex, listToString(result), listToString(actual)))
+			t.Fatalf("结果与实际不相符, caseIndex: %d, result: %s, actual: %s",
+				caseIndex, listToString(result), listToString(actual))
 		}
 
 		verify(t, caseIndex, result.Next, actual.Next)
 	} else {
-		t.Fatal(fmt.Sprintf("结果与实际不相符, caseIndex: %d, result: %s, actual: %s",
-			caseIndex, listToString(result), listToString(actual)))
+		t.Fatalf("结果与实际不相符, caseIndex: %d, result: %s, actual: %s",
+			caseIndex, listToString(result), listToString(actual))
 	}
 }
