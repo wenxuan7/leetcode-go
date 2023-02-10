@@ -2,7 +2,7 @@
 
 go刷leetcode
 
-## Description of dictionary
+## Description of package
 
 ```
 .
