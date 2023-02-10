@@ -69,5 +69,4 @@ func TestMinStack(t *testing.T) {
 			}
 		}
 	}
-
 }

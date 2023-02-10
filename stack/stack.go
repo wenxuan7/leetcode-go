@@ -1,6 +1,8 @@
 package stack
 
-import "container/list"
+import (
+	"container/list"
+)
 
 // isValid
 // 20. 有效的括号
