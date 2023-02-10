@@ -7,91 +7,91 @@ import (
 	"testing"
 )
 
-var (
-	reverseListData = [][]int{
-		{1, 2, 3, 4, 5, 6, 7},
-		{3, 4, 5, 6, 7, 8},
-	}
-	reverseListActual = [][]int{
-		{7, 6, 5, 4, 3, 2, 1},
-		{8, 7, 6, 5, 4, 3},
-	}
-)
-
 func TestReverseList(t *testing.T) {
-	for i := range reverseListData {
-		verify(t, i, reverseList(generateList(reverseListData[i])), generateList(reverseListActual[i]))
+	var (
+		data = [][]int{
+			{1, 2, 3, 4, 5, 6, 7},
+			{3, 4, 5, 6, 7, 8},
+		}
+		actual = [][]int{
+			{7, 6, 5, 4, 3, 2, 1},
+			{8, 7, 6, 5, 4, 3},
+		}
+	)
+
+	for i := range data {
+		verify(t, i, reverseList(generateList(data[i])), generateList(actual[i]))
 	}
 }
-
-var (
-	swapPairsData = [][]int{
-		{1, 2, 3, 4},
-		{},
-		{1, 2, 3},
-	}
-	swapPairsActual = [][]int{
-		{2, 1, 4, 3},
-		{},
-		{2, 1, 3},
-	}
-)
 
 func TestSwapPairs(t *testing.T) {
-	for i := range swapPairsData {
-		verify(t, i, swapPairs(generateList(swapPairsData[i])), generateList(swapPairsActual[i]))
+	var (
+		data = [][]int{
+			{1, 2, 3, 4},
+			{},
+			{1, 2, 3},
+		}
+		actual = [][]int{
+			{2, 1, 4, 3},
+			{},
+			{2, 1, 3},
+		}
+	)
+
+	for i := range data {
+		verify(t, i, swapPairs(generateList(data[i])), generateList(actual[i]))
 	}
 }
 
-var (
-	hasCycleData = [][]int{
-		{3, 2, 0, -4},
-		{1, 2},
-		{3, 2, 0, -4},
-	}
-	hasCyclePos = []int{
-		1,
-		0,
-		-1,
-	}
-	hasCycleActual = []bool{
-		true,
-		true,
-		false,
-		false,
-	}
-)
-
 func TestHasCycle(t *testing.T) {
-	for i := range hasCycleData {
-		result := hasCycle(generateCycleList(hasCycleData[i], hasCyclePos[i]))
-		if result != hasCycleActual[i] {
+	var (
+		data = [][]int{
+			{3, 2, 0, -4},
+			{1, 2},
+			{3, 2, 0, -4},
+		}
+		pos = []int{
+			1,
+			0,
+			-1,
+		}
+		actual = []bool{
+			true,
+			true,
+			false,
+			false,
+		}
+	)
+
+	for i := range data {
+		result := hasCycle(generateCycleList(data[i], pos[i]))
+		if result != actual[i] {
 			t.Fatalf("结果与实际不相符, caseIndex: %d, result: %v, actual: %v",
-				i, result, hasCycleActual[i])
+				i, result, actual[i])
 		}
 	}
 }
 
-var (
-	detectCycleData = [][]int{
-		{3, 2, 0, -4},
-		{1, 2},
-		{},
-		{1},
-	}
-	detectCyclePos = []int{
-		1,
-		0,
-		0,
-		-1,
-	}
-)
-
 func TestDetectCycle(t *testing.T) {
-	for i := range detectCycleData {
-		head := generateCycleList(detectCycleData[i], detectCyclePos[i])
+	var (
+		data = [][]int{
+			{3, 2, 0, -4},
+			{1, 2},
+			{},
+			{1},
+		}
+		pos = []int{
+			1,
+			0,
+			0,
+			-1,
+		}
+	)
+
+	for i := range data {
+		head := generateCycleList(data[i], pos[i])
 		result := detectCycle(head)
-		actual := getListNode(head, detectCyclePos[i])
+		actual := getListNode(head, pos[i])
 
 		if result != actual {
 			t.Fatalf("结果与实际不相符, caseIndex: %d, result: %d, actual: %d",
@@ -100,66 +100,66 @@ func TestDetectCycle(t *testing.T) {
 	}
 }
 
-var (
-	reverseKGroupData = [][]int{
-		{},
-		{1},
-		{1, 2},
-		{1, 2, 3},
-		{1, 2, 3, 4},
-		{1, 2, 3, 4},
-	}
-
-	reverseKGroupK = []int{
-		2,
-		2,
-		2,
-		2,
-		2,
-		4,
-	}
-	reverseKGroupActual = [][]int{
-		{},
-		{1},
-		{2, 1},
-		{2, 1, 3},
-		{2, 1, 4, 3},
-		{4, 3, 2, 1},
-	}
-)
-
 func TestReverseKGroup(t *testing.T) {
-	for i := range reverseKGroupData {
-		result := reverseKGroup(generateList(reverseKGroupData[i]), reverseKGroupK[i])
-		verify(t, i, result, generateList(reverseKGroupActual[i]))
+	var (
+		data = [][]int{
+			{},
+			{1},
+			{1, 2},
+			{1, 2, 3},
+			{1, 2, 3, 4},
+			{1, 2, 3, 4},
+		}
+
+		k = []int{
+			2,
+			2,
+			2,
+			2,
+			2,
+			4,
+		}
+		actual = [][]int{
+			{},
+			{1},
+			{2, 1},
+			{2, 1, 3},
+			{2, 1, 4, 3},
+			{4, 3, 2, 1},
+		}
+	)
+
+	for i := range data {
+		result := reverseKGroup(generateList(data[i]), k[i])
+		verify(t, i, result, generateList(actual[i]))
 	}
 }
 
-var (
-	mergeTwoListsData1 = [][]int{
-		{},
-		{},
-		{1},
-		{1, 3, 4, 6},
-	}
-	mergeTwoListsData2 = [][]int{
-		{},
-		{1},
-		{},
-		{2, 5},
-	}
-	mergeTwoListsActual = [][]int{
-		{},
-		{1},
-		{1},
-		{1, 2, 3, 4, 5, 6},
-	}
-)
-
 func TestMergeTwoLists(t *testing.T) {
-	for i := range mergeTwoListsData1 {
-		result := mergeTwoLists(generateList(mergeTwoListsData1[i]), generateList(mergeTwoListsData2[i]))
-		verify(t, i, result, generateList(mergeTwoListsActual[i]))
+	var (
+		data1 = [][]int{
+			{},
+			{},
+			{1},
+			{1, 3, 4, 6},
+		}
+		data2 = [][]int{
+			{},
+			{1},
+			{},
+			{2, 5},
+		}
+		actual = [][]int{
+			{},
+			{1},
+			{1},
+			{1, 2, 3, 4, 5, 6},
+		}
+	)
+
+	for i := range data1 {
+		result := mergeTwoLists(generateList(data1[i]), generateList(data2[i]))
+		verify(t, i, result, generateList(actual[i]))
 	}
 }
 
