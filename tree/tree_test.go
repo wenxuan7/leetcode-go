@@ -54,7 +54,7 @@ func TestPostorder(t *testing.T) {
 	}
 
 	for i := range data {
-		result := postorder(assert.GenerateNTreeOfPreorder(data[i], 0))
+		result := postorder(assert.GenerateNTreeOfPreorder(data[i]))
 		assert.VerifyArr(t, i, result, actual[i])
 	}
 }
@@ -72,7 +72,7 @@ func TestPreorder(t *testing.T) {
 	}
 
 	for i := range data {
-		result := preorder(assert.GenerateNTreeOfPreorder(data[i], 0))
+		result := preorder(assert.GenerateNTreeOfPreorder(data[i]))
 		assert.VerifyArr(t, i, result, actual[i])
 	}
 }
@@ -90,7 +90,7 @@ func TestLevelOrder(t *testing.T) {
 	}
 
 	for i := range data {
-		result := levelOrder(assert.GenerateNTreeOfPreorder(data[i], 0))
+		result := levelOrder(assert.GenerateNTreeOfPreorder(data[i]))
 		assert.VerifySecArr(t, i, result, actual[i])
 	}
 }

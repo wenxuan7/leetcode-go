@@ -52,7 +52,7 @@ func Verify2Tree(t *testing.T, caseIndex int, result, actual *TreeNode) {
 }
 
 // GenerateNTreeOfPreorder 根据层序遍历生成N叉树
-func GenerateNTreeOfPreorder(nums []string, i int) *Node {
+func GenerateNTreeOfPreorder(nums []string) *Node {
 	if nums == nil || len(nums) == 0 {
 		return nil
 	}
