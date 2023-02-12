@@ -1,9 +1,7 @@
 package list
 
 import (
-	. "leetcode-go/data"
-	"strconv"
-	"strings"
+	"leetcode-go/assert"
 	"testing"
 )
 
@@ -20,7 +18,7 @@ func TestReverseList(t *testing.T) {
 	)
 
 	for i := range data {
-		verify(t, i, reverseList(generateList(data[i])), generateList(actual[i]))
+		assert.VerifyList(t, i, reverseList(assert.GenerateList(data[i])), assert.GenerateList(actual[i]))
 	}
 }
 
@@ -39,7 +37,7 @@ func TestSwapPairs(t *testing.T) {
 	)
 
 	for i := range data {
-		verify(t, i, swapPairs(generateList(data[i])), generateList(actual[i]))
+		assert.VerifyList(t, i, swapPairs(assert.GenerateList(data[i])), assert.GenerateList(actual[i]))
 	}
 }
 
@@ -64,7 +62,7 @@ func TestHasCycle(t *testing.T) {
 	)
 
 	for i := range data {
-		result := hasCycle(generateCycleList(data[i], pos[i]))
+		result := hasCycle(assert.GenerateCycleList(data[i], pos[i]))
 		if result != actual[i] {
 			t.Fatalf("结果与实际不相符, caseIndex: %d, result: %v, actual: %v",
 				i, result, actual[i])
@@ -89,9 +87,9 @@ func TestDetectCycle(t *testing.T) {
 	)
 
 	for i := range data {
-		head := generateCycleList(data[i], pos[i])
+		head := assert.GenerateCycleList(data[i], pos[i])
 		result := detectCycle(head)
-		actual := getListNode(head, pos[i])
+		actual := assert.GetListNode(head, pos[i])
 
 		if result != actual {
 			t.Fatalf("结果与实际不相符, caseIndex: %d, result: %d, actual: %d",
@@ -130,8 +128,8 @@ func TestReverseKGroup(t *testing.T) {
 	)
 
 	for i := range data {
-		result := reverseKGroup(generateList(data[i]), k[i])
-		verify(t, i, result, generateList(actual[i]))
+		result := reverseKGroup(assert.GenerateList(data[i]), k[i])
+		assert.VerifyList(t, i, result, assert.GenerateList(actual[i]))
 	}
 }
 
@@ -158,113 +156,7 @@ func TestMergeTwoLists(t *testing.T) {
 	)
 
 	for i := range data1 {
-		result := mergeTwoLists(generateList(data1[i]), generateList(data2[i]))
-		verify(t, i, result, generateList(actual[i]))
-	}
-}
-
-// getListNode 根据索引获取链表节点
-func getListNode(head *ListNode, i int) *ListNode {
-	var (
-		count = 0
-		curr  = head
-	)
-
-	for curr != nil {
-		if count == i {
-			return curr
-		}
-		curr = curr.Next
-		count++
-	}
-
-	return nil
-}
-
-// generateCycleList 生成环形链表， pos为成环索引位置
-func generateCycleList(num []int, pos int) *ListNode {
-	if num == nil || len(num) == 0 {
-		return nil
-	}
-
-	var (
-		preHead = &ListNode{}
-		pre     = preHead
-		curr    *ListNode
-		posNode *ListNode
-		tail    *ListNode
-	)
-
-	for i := range num {
-		curr = &ListNode{Val: num[i], Next: nil}
-		pre.Next = curr
-		pre = curr
-
-		if i == pos {
-			posNode = curr
-		}
-		if i == len(num)-1 {
-			tail = curr
-		}
-	}
-
-	if posNode != nil {
-		tail.Next = posNode
-	}
-
-	return preHead.Next
-}
-
-// generateList 生成链表，返回头节点
-func generateList(num []int) *ListNode {
-	if num == nil || len(num) == 0 {
-		return nil
-	}
-
-	var (
-		preHead           = &ListNode{}
-		pre               = preHead
-		curr    *ListNode = nil
-	)
-
-	for i := range num {
-		curr = &ListNode{Val: num[i], Next: nil}
-		pre.Next = curr
-		pre = curr
-	}
-
-	return preHead.Next
-}
-
-// listToString 链表转字符串做格式化输出
-func listToString(node *ListNode) string {
-	bd := strings.Builder{}
-	bd.WriteString("[")
-	for node != nil {
-		bd.WriteString(strconv.Itoa(node.Val))
-		if node.Next != nil {
-			bd.WriteString(", ")
-		}
-		node = node.Next
-	}
-	bd.WriteString("]")
-
-	return bd.String()
-}
-
-// verify 校验两个链表的全部节点值是否相等
-func verify(t *testing.T, caseIndex int, result *ListNode, actual *ListNode) {
-	if result == nil && actual == nil {
-		return
-	} else if result != nil && actual != nil {
-		if result.Val != actual.Val {
-			t.Fatalf("结果与实际不相符, caseIndex: %d, result: %s, actual: %s",
-				caseIndex, listToString(result), listToString(actual))
-		}
-
-		verify(t, caseIndex, result.Next, actual.Next)
-	} else {
-		t.Fatalf("结果与实际不相符, caseIndex: %d, result: %s, actual: %s",
-			caseIndex, listToString(result), listToString(actual))
+		result := mergeTwoLists(assert.GenerateList(data1[i]), assert.GenerateList(data2[i]))
+		assert.VerifyList(t, i, result, assert.GenerateList(actual[i]))
 	}
 }

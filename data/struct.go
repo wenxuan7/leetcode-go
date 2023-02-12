@@ -6,8 +6,14 @@ type ListNode struct {
 	Next *ListNode
 }
 
-// TreeNode 树节点
+// TreeNode 二叉树节点
 type TreeNode struct {
 	Val         int
 	Left, Right *TreeNode
+}
+
+// Node n叉树节点
+type Node struct {
+	Val      int
+	Children []*Node
 }
