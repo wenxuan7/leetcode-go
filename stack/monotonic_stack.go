@@ -42,3 +42,35 @@ func largestRectangleArea(heights []int) int {
 
 	return max
 }
+
+// trap
+// 42. 接雨水
+// https://leetcode.cn/problems/trapping-rain-water/
+func trap(height []int) (ans int) {
+	monoStack := make([]int, len(height))
+	top := -1
+	for i, h := range height {
+		for top > -1 && h > height[monoStack[top]] {
+			num := monoStack[top]
+			top--
+			if top == -1 {
+				break
+			}
+			left := monoStack[top]
+			curWidth := i - left - 1
+			curHeight := min(height[left], h) - height[num]
+			ans += curWidth * curHeight
+		}
+
+		top++
+		monoStack[top] = i
+	}
+	return
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}

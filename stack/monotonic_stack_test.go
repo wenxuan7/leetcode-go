@@ -22,3 +22,20 @@ func TestLargestRectangleArea(t *testing.T) {
 		}
 	}
 }
+
+func TestTrap(t *testing.T) {
+	data := [][]int{
+		{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1},
+	}
+	actual := []int{
+		6,
+	}
+
+	for i := range data {
+		result := trap(data[i])
+		if result != actual[i] {
+			t.Fatalf("结果与实际不相符, caseIndex: %d, result: %d, actual: %d",
+				i, result, actual[i])
+		}
+	}
+}
