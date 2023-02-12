@@ -1,6 +1,8 @@
 package hashmap
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestIsAnagram(t *testing.T) {
 	data1 := []string{
@@ -23,4 +25,17 @@ func TestIsAnagram(t *testing.T) {
 				i, result, actual[i])
 		}
 	}
+}
+
+func TestGroupAnagrams(t *testing.T) {
+	data := []string{"eat", "tea", "tan", "ate", "nat", "bat"}
+	actual := [][]string{
+		{"bat"},
+		{"nat", "tan"},
+		{"ate", "eat", "tea"},
+	}
+
+	result := groupAnagrams(data)
+	t.Logf("result: %v, actual: %v\n",
+		result, actual)
 }
