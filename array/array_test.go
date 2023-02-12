@@ -170,31 +170,6 @@ func TestMerge(t *testing.T) {
 	}
 }
 
-func TestTwoSum(t *testing.T) {
-	var (
-		data = [][]int{
-			{},
-			{1, 2, 3, 4, 5, 6},
-			{1, 2, 3, 4, 5, 6},
-		}
-		target = []int{
-			1,
-			9,
-			12,
-		}
-		actual = [][]int{
-			{},
-			{3, 4},
-			{},
-		}
-	)
-
-	for i := range data {
-		result := twoSum(data[i], target[i])
-		verifyArr(t, i, result, actual[i])
-	}
-}
-
 func TestPlusOne(t *testing.T) {
 	var (
 		data = [][]int{

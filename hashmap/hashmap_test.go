@@ -39,3 +39,43 @@ func TestGroupAnagrams(t *testing.T) {
 	t.Logf("result: %v, actual: %v\n",
 		result, actual)
 }
+
+func TestTwoSum(t *testing.T) {
+	var (
+		data = [][]int{
+			{},
+			{1, 2, 3, 4, 5, 6},
+			{1, 2, 3, 4, 5, 6},
+		}
+		target = []int{
+			1,
+			9,
+			12,
+		}
+		actual = [][]int{
+			{},
+			{3, 4},
+			{},
+		}
+	)
+
+	for i := range data {
+		result := twoSum(data[i], target[i])
+		verifyArr(t, i, result, actual[i])
+	}
+}
+
+// verifyArr 校验数组全部值是否相等
+func verifyArr(t *testing.T, caseIndex int, result []int, actual []int) {
+	if len(result) != len(actual) {
+		t.Fatalf("len must be equal, result: %v, resultLen: %d, actual: %v, actualLen: %d",
+			result, len(result), actual, len(actual))
+	}
+
+	for i := range actual {
+		if result[i] != actual[i] {
+			t.Fatalf("结果与实际值不同, caseIndex: %d, result: %d, actual: %d, i: %d",
+				caseIndex, result, actual, i)
+		}
+	}
+}
