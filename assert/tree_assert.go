@@ -62,6 +62,7 @@ func GenerateNTreeOfPreorder(nums []string) *Node {
 		err error
 	)
 
+	// 队列
 	q := make([]*Node, 0, len(nums))
 	if v, err = strconv.Atoi(nums[0]); err != nil {
 		panic(err)
@@ -82,10 +83,12 @@ func GenerateNTreeOfPreorder(nums []string) *Node {
 
 			node := &Node{Val: v}
 			children = append(children, node)
+			// 入队列
 			q = append(q, node)
 			j++
 		}
 		q[0].Children = children
+		// 出队列
 		q = q[1:]
 	}
 
