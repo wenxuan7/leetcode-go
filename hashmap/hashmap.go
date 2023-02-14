@@ -27,9 +27,9 @@ func isAnagram(s string, t string) bool {
 // groupAnagrams
 // 49. 字母异位词分组
 // https://leetcode.cn/problems/group-anagrams/
-func groupAnagrams(strs []string) [][]string {
+func groupAnagrams(ss []string) [][]string {
 	mp := map[[26]int][]string{}
-	for _, str := range strs {
+	for _, str := range ss {
 		cnt := [26]int{}
 		for _, b := range str {
 			cnt[b-'a']++

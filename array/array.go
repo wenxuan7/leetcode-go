@@ -6,7 +6,7 @@ import "sort"
 // 11. 盛最多水的容器
 // https://leetcode.cn/problems/container-with-most-water/
 func maxArea(height []int) int {
-	if height == nil || len(height) < 2 {
+	if len(height) < 2 {
 		return 0
 	}
 
@@ -39,7 +39,7 @@ func maxArea(height []int) int {
 // 283. 移动零
 // https://leetcode.cn/problems/move-zeroes/
 func moveZeroes(nums []int) {
-	if nums == nil || len(nums) == 0 {
+	if len(nums) == 0 {
 		return
 	}
 
@@ -130,7 +130,7 @@ func threeSum(nums []int) [][]int {
 // 26. 删除有序数组中的重复项
 // https://leetcode.cn/problems/remove-duplicates-from-sorted-array/
 func removeDuplicates(nums []int) int {
-	if nums == nil || len(nums) == 0 {
+	if len(nums) == 0 {
 		return 0
 	}
 
@@ -154,8 +154,7 @@ func removeDuplicates(nums []int) int {
 // 189. 轮转数组
 // https://leetcode.cn/problems/rotate-array/
 func rotate(nums []int, k int) {
-	if k < 1 || nums == nil ||
-		len(nums) == 0 {
+	if k < 1 || len(nums) == 0 {
 		return
 	}
 
@@ -207,7 +206,7 @@ func merge(nums1 []int, m int, nums2 []int, n int) {
 // 66. 加一
 // https://leetcode.cn/problems/plus-one/
 func plusOne(digits []int) []int {
-	if digits == nil || len(digits) == 0 {
+	if len(digits) == 0 {
 		return []int{}
 	}
 

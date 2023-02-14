@@ -7,9 +7,10 @@ import (
 )
 
 // Generate2TreeOfPreorder 根据前序遍历生成二叉树
+// i 初始位置
 func Generate2TreeOfPreorder(nums []string, i int) *TreeNode {
-	if nums == nil || len(nums) == 0 ||
-		i >= len(nums) || nums[i] == "null" {
+	if len(nums) == 0 || i >= len(nums) ||
+		nums[i] == "null" {
 		return nil
 	}
 
@@ -53,7 +54,7 @@ func Verify2Tree(t *testing.T, caseIndex int, result, actual *TreeNode) {
 
 // GenerateNTreeOfPreorder 根据层序遍历生成N叉树
 func GenerateNTreeOfPreorder(nums []string) *Node {
-	if nums == nil || len(nums) == 0 {
+	if len(nums) == 0 {
 		return nil
 	}
 

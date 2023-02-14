@@ -27,7 +27,7 @@ func GetListNode(head *ListNode, i int) *ListNode {
 
 // GenerateCycleList 生成环形链表， pos为成环索引位置
 func GenerateCycleList(num []int, pos int) *ListNode {
-	if num == nil || len(num) == 0 {
+	if len(num) == 0 {
 		return nil
 	}
 
@@ -61,7 +61,7 @@ func GenerateCycleList(num []int, pos int) *ListNode {
 
 // GenerateList 生成链表，返回头节点
 func GenerateList(num []int) *ListNode {
-	if num == nil || len(num) == 0 {
+	if len(num) == 0 {
 		return nil
 	}
 

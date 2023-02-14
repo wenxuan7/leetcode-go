@@ -4,7 +4,7 @@ package queue
 // https://leetcode.cn/problems/sliding-window-maximum/
 func maxSlidingWindow1(nums []int, k int) []int {
 	monoQueue := make([]int, 0, len(nums)-k+1)
-	if nums == nil || len(nums) < k {
+	if len(nums) < k {
 		return []int{}
 	}
 
