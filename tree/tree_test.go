@@ -91,6 +91,6 @@ func TestLevelOrder(t *testing.T) {
 
 	for i := range data {
 		result := levelOrder(assert.GenerateNTreeOfPreorder(data[i]))
-		assert.VerifySecArr(t, i, result, actual[i])
+		assert.Verify2Arr(t, i, result, actual[i])
 	}
 }

@@ -66,7 +66,7 @@ func TestThreeSum(t *testing.T) {
 	)
 
 	for i := range data {
-		assert.VerifySecArr(t, i, threeSum(data[i]), actual[i])
+		assert.Verify2Arr(t, i, threeSum(data[i]), actual[i])
 	}
 }
 
