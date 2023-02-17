@@ -1,0 +1,87 @@
+package recursive
+
+// majorityElement
+// 169. 多数元素
+// https://leetcode.cn/problems/majority-element/description/
+func majorityElement(nums []int) int {
+	var partition func(nums []int, left, right int) int
+	partition = func(nums []int, left, right int) int {
+		if left == right {
+			return left
+		}
+
+		mid := ((right - left) >> 1) + left
+		leftMajor := partition(nums, left, mid)
+		rightMajor := partition(nums, mid+1, right)
+
+		if leftMajor == rightMajor {
+			return leftMajor
+		}
+
+		leftMajorCount, rightMajorCount := 0, 0
+		for i := left; i <= right; i++ {
+			if nums[i] == nums[leftMajor] {
+				leftMajorCount++
+			}
+
+			if nums[i] == nums[rightMajor] {
+				rightMajorCount++
+			}
+		}
+
+		if leftMajorCount > rightMajorCount {
+			return leftMajor
+		} else {
+			return rightMajor
+		}
+	}
+
+	ans := partition(nums, 0, len(nums)-1)
+	return nums[ans]
+}
+
+// letterCombinations
+// 17. 电话号码的字母组合
+// https://leetcode.cn/problems/letter-combinations-of-a-phone-number/
+func letterCombinations(digits string) []string {
+	if len(digits) == 0 {
+		return []string{}
+	}
+
+	numToLetter := map[int][]byte{
+		2: {'a', 'b', 'c'},
+		3: {'d', 'e', 'f'},
+		4: {'g', 'h', 'i'},
+		5: {'j', 'k', 'l'},
+		6: {'m', 'n', 'o'},
+		7: {'p', 'q', 'r', 's'},
+		8: {'t', 'u', 'v'},
+		9: {'w', 'x', 'y', 'z'},
+	}
+
+	bs := []byte(digits)
+	var recursive func(start int, temp []byte)
+	count := 1
+	for _, b := range bs {
+		count *= len(numToLetter[int(b-'0')])
+	}
+	ans := make([]string, 0, count)
+	recursive = func(start int, temp []byte) {
+		if start == len(bs) {
+			dst := make([]byte, len(temp))
+			copy(dst, temp)
+			ans = append(ans, string(dst))
+			return
+		}
+
+		b := bs[start]
+		for _, b2 := range numToLetter[int(b-'0')] {
+			temp = append(temp, b2)
+			recursive(start+1, temp)
+			temp = temp[:len(temp)-1]
+		}
+	}
+
+	recursive(0, make([]byte, 0, len(bs)))
+	return ans
+}
