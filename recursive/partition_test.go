@@ -58,3 +58,15 @@ func TestLetterCombinations(t *testing.T) {
 		}
 	}
 }
+
+func TestSolveNQueens(t *testing.T) {
+	data := []int{
+		4,
+		5,
+	}
+
+	for i := range data {
+		result := solveNQueens(data[i])
+		t.Logf("%v\n", result)
+	}
+}

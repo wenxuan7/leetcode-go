@@ -85,3 +85,71 @@ func letterCombinations(digits string) []string {
 	recursive(0, make([]byte, 0, len(bs)))
 	return ans
 }
+
+// solveNQueens
+// 51. N 皇后
+// https://leetcode.cn/problems/n-queens/
+func solveNQueens(n int) [][]string {
+	if n < 1 {
+		return [][]string{}
+	}
+
+	ans := make([][]string, 0)
+	rows := make([]int, 0, n)
+	colHas := make([]bool, n)
+	diagonal1, diagonal2 := map[int]bool{}, map[int]bool{}
+	var recursive func(row int)
+	recursive = func(row int) {
+		if row == n {
+			ans = append(ans, generateQString(rows))
+			return
+		}
+
+		for i := 0; i < n; i++ {
+			if colHas[i] {
+				continue
+			}
+			if diagonal1[row+i] {
+				continue
+			}
+			if diagonal2[row-i] {
+				continue
+			}
+
+			colHas[i] = true
+			diagonal1[row+i] = true
+			diagonal2[row-i] = true
+			rows = append(rows, i)
+			recursive(row + 1)
+			rows = rows[:len(rows)-1]
+			diagonal2[row-i] = false
+			diagonal1[row+i] = false
+			colHas[i] = false
+		}
+	}
+
+	recursive(0)
+
+	return ans
+}
+
+func generateQString(rows []int) []string {
+	if len(rows) == 0 {
+		return []string{}
+	}
+
+	ans := make([]string, 0, len(rows))
+	for _, row := range rows {
+		bs := make([]byte, len(rows))
+		for i := 0; i < len(rows); i++ {
+			if i == row {
+				bs[i] = 'Q'
+				continue
+			}
+			bs[i] = '.'
+		}
+		ans = append(ans, string(bs))
+	}
+
+	return ans
+}
