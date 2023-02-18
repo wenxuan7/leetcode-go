@@ -2,6 +2,7 @@ package queue
 
 import (
 	. "leetcode-go/data"
+	"math"
 )
 
 // 102. 二叉树的层序遍历
@@ -101,4 +102,40 @@ func isModify(str1, str2 string) bool {
 	}
 
 	return count == 1
+}
+
+// largestValues
+// 515. 在每个树行中找最大值
+// https://leetcode.cn/problems/find-largest-value-in-each-tree-row/
+func largestValues(root *TreeNode) []int {
+	if root == nil {
+		return []int{}
+	}
+
+	ans := make([]int, 0)
+
+	q := make([]*TreeNode, 0)
+	q = append(q, root)
+
+	for len(q) > 0 {
+		levelMax := math.MinInt
+
+		levelCount := len(q)
+		for i := 0; i < levelCount; i++ {
+			if q[i].Val > levelMax {
+				levelMax = q[i].Val
+			}
+			if q[i].Left != nil {
+				q = append(q, q[i].Left)
+			}
+			if q[i].Right != nil {
+				q = append(q, q[i].Right)
+			}
+		}
+
+		q = q[levelCount:]
+		ans = append(ans, levelMax)
+	}
+
+	return ans
 }

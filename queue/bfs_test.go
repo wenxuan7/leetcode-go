@@ -43,3 +43,17 @@ func TestMinMutation(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestLargestValues(t *testing.T) {
+	data := []*TreeNode{
+		{Val: 1, Left: &TreeNode{Val: 3, Left: &TreeNode{Val: 5}, Right: &TreeNode{Val: 3}}, Right: &TreeNode{Val: 2, Right: &TreeNode{Val: 9}}},
+	}
+	actual := [][]int{
+		{1, 3, 9},
+	}
+
+	for i := range data {
+		result := largestValues(data[i])
+		assert.VerifyArr(t, i, result, actual[i])
+	}
+}
