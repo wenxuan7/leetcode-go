@@ -19,3 +19,27 @@ func TestLevelOrder(t *testing.T) {
 		assert.Verify2Arr(t, i, result, actual[i])
 	}
 }
+
+func TestMinMutation(t *testing.T) {
+	startGene := []string{
+		"AACCGGTT",
+		"AAAAAAAT",
+	}
+	endGene := []string{
+		"AACCGGTA",
+		"CCCCCCCC",
+	}
+	bank := [][]string{
+		{"AACCGGTA"},
+		{"AAAAAAAC", "AAAAAAAA", "CCCCCCCC"},
+	}
+	actual := []int{
+		1,
+		-1,
+	}
+
+	for i := range startGene {
+		result := minMutation(startGene[i], endGene[i], bank[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
