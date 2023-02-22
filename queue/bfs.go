@@ -139,3 +139,96 @@ func largestValues(root *TreeNode) []int {
 
 	return ans
 }
+
+// ladderLength
+// 127. 单词接龙
+// https://leetcode.cn/problems/word-ladder/
+func ladderLength(beginWord string, endWord string, wordList []string) int {
+	m := make(map[string]int, len(beginWord)*(len(wordList)+1))
+	graph := make([][]int, 0)
+	addM := func(str *string) int {
+		id, ok := m[*str]
+		if !ok {
+			id = len(m)
+			m[*str] = id
+			graph = append(graph, []int{})
+		}
+		return id
+	}
+
+	generateGraph := func(str *string) int {
+		id1 := addM(str)
+
+		bs := []byte(*str)
+		for i, v := range bs {
+			bs[i] = '*'
+			s := string(bs)
+			id2 := addM(&s)
+			graph[id1] = append(graph[id1], id2)
+			graph[id2] = append(graph[id2], id1)
+			bs[i] = v
+		}
+
+		return id1
+	}
+
+	for i := range wordList {
+		generateGraph(&wordList[i])
+	}
+
+	startId := generateGraph(&beginWord)
+	endId, ok := m[endWord]
+	if !ok {
+		return 0
+	}
+
+	const inf = math.MaxInt64
+	distStart := make([]int, len(m))
+	for i := range distStart {
+		distStart[i] = inf
+	}
+	distStart[startId] = 0
+
+	distEnd := make([]int, len(m))
+	for i := range distEnd {
+		distEnd[i] = inf
+	}
+	distEnd[endId] = 0
+
+	qStart := []int{startId}
+	qEnd := []int{endId}
+	for len(qStart) > 0 && len(qEnd) > 0 {
+		l := len(qStart)
+
+		for i := 0; i < l; i++ {
+			v := qStart[i]
+			if distEnd[v] < inf {
+				return (distEnd[v]+distStart[v])/2 + 1
+			}
+			for j := range graph[v] {
+				if distStart[graph[v][j]] == inf {
+					distStart[graph[v][j]] = distStart[v] + 1
+					qStart = append(qStart, graph[v][j])
+				}
+			}
+		}
+		qStart = qStart[l:]
+
+		l = len(qEnd)
+		for i := 0; i < l; i++ {
+			v := qEnd[i]
+			if distStart[v] < inf {
+				return (distEnd[v]+distStart[v])/2 + 1
+			}
+			for j := range graph[v] {
+				if distEnd[graph[v][j]] == inf {
+					distEnd[graph[v][j]] = distEnd[v] + 1
+					qEnd = append(qEnd, graph[v][j])
+				}
+			}
+		}
+		qEnd = qEnd[l:]
+	}
+
+	return 0
+}

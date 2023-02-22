@@ -57,3 +57,24 @@ func TestLargestValues(t *testing.T) {
 		assert.VerifyArr(t, i, result, actual[i])
 	}
 }
+
+func TestLadderLength(t *testing.T) {
+	beginWord := []string{
+		"hit",
+	}
+	endWord := []string{
+		"cog",
+	}
+	wordList := [][]string{
+		{"hot", "dot", "dog", "lot", "log", "cog"},
+	}
+	actual := []int{
+		5,
+	}
+
+	for i := range beginWord {
+		result := ladderLength(beginWord[i], endWord[i], wordList[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+
+}
