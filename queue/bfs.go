@@ -144,26 +144,26 @@ func largestValues(root *TreeNode) []int {
 // 127. 单词接龙
 // https://leetcode.cn/problems/word-ladder/
 func ladderLength(beginWord string, endWord string, wordList []string) int {
-	m := make(map[string]int, len(beginWord)*(len(wordList)+1))
+	strToId := make(map[string]int, len(beginWord)*(len(wordList)+1))
 	graph := make([][]int, 0)
-	addM := func(str *string) int {
-		id, ok := m[*str]
+	generateStrToId := func(str *string) int {
+		id, ok := strToId[*str]
 		if !ok {
-			id = len(m)
-			m[*str] = id
+			id = len(strToId)
+			strToId[*str] = id
 			graph = append(graph, []int{})
 		}
 		return id
 	}
 
 	generateGraph := func(str *string) int {
-		id1 := addM(str)
+		id1 := generateStrToId(str)
 
 		bs := []byte(*str)
 		for i, v := range bs {
 			bs[i] = '*'
 			s := string(bs)
-			id2 := addM(&s)
+			id2 := generateStrToId(&s)
 			graph[id1] = append(graph[id1], id2)
 			graph[id2] = append(graph[id2], id1)
 			bs[i] = v
@@ -172,24 +172,26 @@ func ladderLength(beginWord string, endWord string, wordList []string) int {
 		return id1
 	}
 
+	// 建立双向图
 	for i := range wordList {
 		generateGraph(&wordList[i])
 	}
 
 	startId := generateGraph(&beginWord)
-	endId, ok := m[endWord]
+	endId, ok := strToId[endWord]
 	if !ok {
 		return 0
 	}
 
+	// 存储已搜索的id
 	const inf = math.MaxInt64
-	distStart := make([]int, len(m))
+	distStart := make([]int, len(strToId))
 	for i := range distStart {
 		distStart[i] = inf
 	}
 	distStart[startId] = 0
 
-	distEnd := make([]int, len(m))
+	distEnd := make([]int, len(strToId))
 	for i := range distEnd {
 		distEnd[i] = inf
 	}
@@ -197,6 +199,7 @@ func ladderLength(beginWord string, endWord string, wordList []string) int {
 
 	qStart := []int{startId}
 	qEnd := []int{endId}
+	// 双向广度优先搜索
 	for len(qStart) > 0 && len(qEnd) > 0 {
 		l := len(qStart)
 
