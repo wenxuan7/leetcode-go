@@ -235,3 +235,93 @@ func ladderLength(beginWord string, endWord string, wordList []string) int {
 
 	return 0
 }
+
+// findLadders
+// 126. 单词接龙 II
+// https://leetcode.cn/problems/word-ladder-ii/
+func findLadders(beginWord string, endWord string, wordList []string) [][]string {
+	ans := make([][]string, 0)
+	graph := make(map[string][]string, len(wordList))
+
+	// 检索出beginWord的下一层节点
+	graph[beginWord] = make([]string, 0)
+	for i := range wordList {
+		if wordList[i] == beginWord {
+			continue
+		}
+		graph[wordList[i]] = make([]string, 0)
+		if isModify(wordList[i], beginWord) {
+			graph[beginWord] = append(graph[beginWord], wordList[i])
+			graph[wordList[i]] = append(graph[wordList[i]], beginWord)
+		}
+	}
+	// 检索wordList里每一个的下一层节点
+	for i := 0; i < len(wordList); i++ {
+		if beginWord == wordList[i] {
+			continue
+		}
+		for j := i + 1; j < len(wordList); j++ {
+			if beginWord == wordList[j] {
+				continue
+			}
+			if isModify(wordList[i], wordList[j]) {
+				graph[wordList[i]] = append(graph[wordList[i]], wordList[j])
+				graph[wordList[j]] = append(graph[wordList[j]], wordList[i])
+			}
+		}
+	}
+
+	strToLevel := make(map[string]int, len(wordList))
+	strToLevel[beginWord] = 0
+	q := []string{beginWord}
+	searched := false
+	for len(q) > 0 {
+		top := q[0]
+		q = q[1:]
+
+		for _, s := range graph[top] {
+			if _, ok := strToLevel[s]; !ok {
+				strToLevel[s] = strToLevel[top] + 1
+				if s == endWord {
+					searched = true
+					break
+				}
+				q = append(q, s)
+			}
+		}
+
+		if searched {
+			break
+		}
+	}
+
+	if !searched {
+		return ans
+	}
+
+	endToBeginPath := make([]string, 0, strToLevel[endWord]+1)
+	endToBeginPath = append(endToBeginPath, endWord)
+	var dfs func(curr string)
+	dfs = func(curr string) {
+		if curr == beginWord {
+			miniPath := make([]string, 0, len(endToBeginPath))
+			for i := len(endToBeginPath) - 1; i >= 0; i-- {
+				miniPath = append(miniPath, endToBeginPath[i])
+			}
+			ans = append(ans, miniPath)
+			return
+		}
+
+		for _, s := range graph[curr] {
+			if strToLevel[s]+1 == strToLevel[curr] {
+				endToBeginPath = append(endToBeginPath, s)
+				dfs(s)
+				endToBeginPath = endToBeginPath[:len(endToBeginPath)-1]
+			}
+		}
+	}
+
+	dfs(endWord)
+
+	return ans
+}

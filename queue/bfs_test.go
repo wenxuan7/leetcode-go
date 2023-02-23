@@ -80,3 +80,23 @@ func TestLadderLength(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestFindLadders(t *testing.T) {
+	beginWord := []string{
+		"hit",
+		"hit",
+	}
+	endWord := []string{
+		"cog",
+		"cog",
+	}
+	wordList := [][]string{
+		{"hot", "dot", "dog", "lot", "log", "cog"},
+		{"hot", "cog", "dot", "dog", "hit", "lot", "log"},
+	}
+
+	for i := range beginWord {
+		result := findLadders(beginWord[i], endWord[i], wordList[i])
+		t.Logf("%v", result)
+	}
+}
