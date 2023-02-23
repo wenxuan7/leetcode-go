@@ -8,7 +8,8 @@ import . "leetcode-go/data"
 
 func TestLevelOrder(t *testing.T) {
 	data := []*TreeNode{
-		{Val: 3, Left: &TreeNode{Val: 9}, Right: &TreeNode{Val: 20, Left: &TreeNode{Val: 15}, Right: &TreeNode{Val: 7}}},
+		{Val: 3, Left: &TreeNode{Val: 9},
+			Right: &TreeNode{Val: 20, Left: &TreeNode{Val: 15}, Right: &TreeNode{Val: 7}}},
 	}
 	actual := [][][]int{
 		{{3}, {9, 20}, {15, 7}},
@@ -46,7 +47,9 @@ func TestMinMutation(t *testing.T) {
 
 func TestLargestValues(t *testing.T) {
 	data := []*TreeNode{
-		{Val: 1, Left: &TreeNode{Val: 3, Left: &TreeNode{Val: 5}, Right: &TreeNode{Val: 3}}, Right: &TreeNode{Val: 2, Right: &TreeNode{Val: 9}}},
+		{Val: 1,
+			Left:  &TreeNode{Val: 3, Left: &TreeNode{Val: 5}, Right: &TreeNode{Val: 3}},
+			Right: &TreeNode{Val: 2, Right: &TreeNode{Val: 9}}},
 	}
 	actual := [][]int{
 		{1, 3, 9},
@@ -76,5 +79,4 @@ func TestLadderLength(t *testing.T) {
 		result := ladderLength(beginWord[i], endWord[i], wordList[i])
 		assert.Verify(t, i, result, actual[i])
 	}
-
 }
