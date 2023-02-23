@@ -30,3 +30,30 @@ func TestNumIslands(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestUpdateBoard(t *testing.T) {
+	data := [][][]byte{
+		{
+			{'E', 'E', 'E', 'E', 'E'},
+			{'E', 'E', 'M', 'E', 'E'},
+			{'E', 'E', 'E', 'E', 'E'},
+			{'E', 'E', 'E', 'E', 'E'},
+		},
+	}
+	click := [][]int{
+		{3, 0},
+	}
+	actual := [][][]byte{
+		{
+			{'B', '1', 'E', '1', 'B'},
+			{'B', '1', 'M', '1', 'B'},
+			{'B', '1', '1', '1', 'B'},
+			{'B', 'B', 'B', 'B', 'B'},
+		},
+	}
+
+	for i := range data {
+		result := updateBoard(data[i], click[i])
+		assert.Verify2Arr(t, i, result, actual[i])
+	}
+}

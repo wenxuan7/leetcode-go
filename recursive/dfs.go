@@ -54,3 +54,63 @@ func numIslands(grid [][]byte) int {
 
 	return ans
 }
+
+// updateBoard
+// 529. 扫雷游戏
+// https://leetcode.cn/problems/minesweeper/
+func updateBoard(board [][]byte, click []int) [][]byte {
+	row, col := len(board), len(board[0])
+	i, j := click[0], click[1]
+	xy := [][]int{{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {-1, -1}, {1, -1}, {-1, 1}}
+
+	set := make([][]bool, row)
+	for k := 0; k < row; k++ {
+		set[k] = make([]bool, col)
+	}
+
+	if board[i][j] == 'M' {
+		board[i][j] = 'X'
+	} else if board[i][j] == 'E' {
+		q := [][]int{{i, j}}
+		set[i][j] = true
+		for len(q) > 0 {
+			top := q[0]
+			q = q[1:]
+			var count byte = 0
+			for _, v := range xy {
+				newI, newJ := top[0]+v[0], top[1]+v[1]
+				if top[0]+v[0] < 0 || top[0]+v[0] >= row {
+					continue
+				}
+				if top[1]+v[1] < 0 || top[1]+v[1] >= col {
+					continue
+				}
+				if board[newI][newJ] == 'M' {
+					count++
+				}
+			}
+			if count > 0 {
+				board[top[0]][top[1]] = 48 + count
+			} else {
+				board[top[0]][top[1]] = 'B'
+				for _, v := range xy {
+					newI, newJ := top[0]+v[0], top[1]+v[1]
+					if top[0]+v[0] < 0 || top[0]+v[0] >= row {
+						continue
+					}
+					if top[1]+v[1] < 0 || top[1]+v[1] >= col {
+						continue
+					}
+
+					if board[newI][newJ] == 'E' && !set[newI][newJ] {
+						set[newI][newJ] = true
+						q = append(q, []int{newI, newJ})
+					}
+				}
+			}
+		}
+
+	}
+
+	return board
+}

@@ -1,9 +1,14 @@
 package assert
 
 import (
+	"golang.org/x/exp/constraints"
 	"math"
 	"testing"
 )
+
+type Number interface {
+	constraints.Integer | constraints.Float
+}
 
 // VerifyFloat64 校验值是否相等
 func VerifyFloat64(t *testing.T, caseIndex int, result, actual, p float64) {
@@ -14,15 +19,15 @@ func VerifyFloat64(t *testing.T, caseIndex int, result, actual, p float64) {
 }
 
 // Verify 校验值是否相等
-func Verify(t *testing.T, caseIndex int, result int, actual int) {
+func Verify[C Number](t *testing.T, caseIndex int, result C, actual C) {
 	if result != actual {
-		t.Fatalf("结果与实际值不同, caseIndex: %d, result: %d, actual: %d",
+		t.Fatalf("结果与实际值不同, caseIndex: %d, result: %v, actual: %v",
 			caseIndex, result, actual)
 	}
 }
 
 // VerifyArr 校验数组全部值是否相等
-func VerifyArr(t *testing.T, caseIndex int, result []int, actual []int) {
+func VerifyArr[C Number](t *testing.T, caseIndex int, result []C, actual []C) {
 	if len(result) != len(actual) {
 		t.Fatalf("len must be equal, result: %v, resultLen: %d, actual: %v, actualLen: %d",
 			result, len(result), actual, len(actual))
@@ -30,14 +35,14 @@ func VerifyArr(t *testing.T, caseIndex int, result []int, actual []int) {
 
 	for i := range actual {
 		if result[i] != actual[i] {
-			t.Fatalf("结果与实际值不同, caseIndex: %d, result: %d, actual: %d, i: %d",
+			t.Fatalf("结果与实际值不同, caseIndex: %d, result: %v, actual: %v, i: %d",
 				caseIndex, result, actual, i)
 		}
 	}
 }
 
 // Verify2Arr 校验二维数组全部值是否相等
-func Verify2Arr(t *testing.T, caseIndex int, result [][]int, actual [][]int) {
+func Verify2Arr[C Number](t *testing.T, caseIndex int, result [][]C, actual [][]C) {
 	if len(result) != len(actual) {
 		t.Fatalf("len must be equal, caseIndex: %d, result: %v, resultLen: %d, actual: %v, actualLen: %d",
 			caseIndex, result, len(result), actual, len(actual))
