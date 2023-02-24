@@ -19,6 +19,8 @@ func TestCloneGraph(t *testing.T) {
 }
 
 // generateGraph 领接列表转换为图
+// 邻接列表 是用于表示有限图的无序列表的集合。每个列表都描述了图中节点的邻居集。
+// 简单起见，每个节点的值都和它的索引相同。例如，第一个节点值为 1（val = 1），第二个节点值为 2（val = 2），以此类推。
 // [[2,4],[1,3],[2,4],[1,3]]
 func generateGraph(neighbors [][]int) *Node {
 	if len(neighbors) == 0 {
