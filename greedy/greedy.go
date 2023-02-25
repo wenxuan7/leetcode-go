@@ -32,3 +32,22 @@ func lemonadeChange(bills []int) bool {
 
 	return true
 }
+
+// maxProfit
+// 122. 买卖股票的最佳时机 II
+// https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/
+func maxProfit(prices []int) int {
+	if len(prices) == 0 {
+		return 0
+	}
+
+	ans := 0
+	for i := 1; i < len(prices); i++ {
+		sub := prices[i] - prices[i-1]
+		if sub > 0 {
+			ans += sub
+		}
+	}
+
+	return ans
+}
