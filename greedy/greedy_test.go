@@ -36,3 +36,23 @@ func TestMaxProfit(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestFindContentChildren(t *testing.T) {
+	g := [][]int{
+		{1, 2, 3},
+		{1, 2},
+	}
+	s := [][]int{
+		{1, 1},
+		{1, 2, 3},
+	}
+	actual := []int{
+		1,
+		2,
+	}
+
+	for i := range g {
+		result := findContentChildren(g[i], s[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}

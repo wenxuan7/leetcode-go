@@ -1,5 +1,7 @@
 package greedy
 
+import "sort"
+
 // lemonadeChange
 // 860. 柠檬水找零
 // https://leetcode.cn/problems/lemonade-change/
@@ -46,6 +48,32 @@ func maxProfit(prices []int) int {
 		sub := prices[i] - prices[i-1]
 		if sub > 0 {
 			ans += sub
+		}
+	}
+
+	return ans
+}
+
+// findContentChildren
+// 455. 分发饼干
+// https://leetcode.cn/problems/assign-cookies/
+func findContentChildren(g []int, s []int) int {
+	if len(s) == 0 {
+		return 0
+	}
+
+	if len(g) == 0 {
+		return len(s)
+	}
+
+	sort.Ints(g)
+	sort.Ints(s)
+
+	ans := 0
+	for i, j := 0, 0; i < len(g) && j < len(s); j++ {
+		if s[j] >= g[i] {
+			ans++
+			i++
 		}
 	}
 
