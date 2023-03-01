@@ -211,3 +211,25 @@ func TestCanJump(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestJump(t *testing.T) {
+	nums := [][]int{
+		{2, 3, 1, 1, 4},
+		{2, 3, 0, 1, 4},
+		{0},
+		{7, 0, 9, 6, 9, 6, 1, 7,
+			9, 0, 1, 2,
+			9, 0, 3},
+	}
+	actual := []int{
+		2,
+		2,
+		0,
+		2,
+	}
+
+	for i := range nums {
+		result := jump(nums[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
