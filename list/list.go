@@ -2,7 +2,7 @@ package list
 
 import (
 	"container/list"
-	. "leetcode-go/data"
+	. "github.com/leetcode-go/data"
 )
 
 // reverseList

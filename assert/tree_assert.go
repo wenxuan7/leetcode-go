@@ -1,7 +1,7 @@
 package assert
 
 import (
-	. "leetcode-go/data"
+	. "github.com/leetcode-go/data"
 	"strconv"
 	"testing"
 )

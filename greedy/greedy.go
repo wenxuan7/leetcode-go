@@ -1,6 +1,8 @@
 package greedy
 
-import "sort"
+import (
+	"sort"
+)
 
 // lemonadeChange
 // 860. 柠檬水找零
@@ -74,6 +76,48 @@ func findContentChildren(g []int, s []int) int {
 		if s[j] >= g[i] {
 			ans++
 			i++
+		}
+	}
+
+	return ans
+}
+
+// robotSim
+// 874. 模拟行走机器人
+// https://leetcode.cn/problems/walking-robot-simulation/
+func robotSim(commands []int, obstacles [][]int) int {
+	dx := []int{0, 1, 0, -1}
+	dy := []int{1, 0, -1, 0}
+	x, y, di := 0, 0, 0
+
+	set := make(map[int64]bool, 10000)
+	for _, nums := range obstacles {
+		k := int64(nums[0] + 30000 + ((nums[1] + 30000) << 16))
+		set[k] = true
+	}
+
+	ans := 0
+	for _, command := range commands {
+		if command == -1 {
+			di = (di + 1) % 4
+		} else if command == -2 {
+			di = (di + 3) % 4
+		} else {
+			for i := 1; i <= command; i++ {
+				nx := x + dx[di]
+				ny := y + dy[di]
+
+				k := int64(nx + 30000 + ((ny + 30000) << 16))
+				if set[k] {
+					break
+				}
+
+				x, y = nx, ny
+				max := x*x + y*y
+				if max > ans {
+					ans = max
+				}
+			}
 		}
 	}
 

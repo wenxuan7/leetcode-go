@@ -1,8 +1,8 @@
 package recursive
 
 import (
-	"leetcode-go/assert"
-	. "leetcode-go/data"
+	"github.com/leetcode-go/assert"
+	. "github.com/leetcode-go/data"
 	"testing"
 )
 

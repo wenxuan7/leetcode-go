@@ -1,7 +1,7 @@
 package recursive
 
 import (
-	. "leetcode-go/data"
+	. "github.com/leetcode-go/data"
 	"math"
 	"sort"
 	"strconv"

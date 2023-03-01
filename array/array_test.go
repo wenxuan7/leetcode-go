@@ -1,7 +1,7 @@
 package array
 
 import (
-	"leetcode-go/assert"
+	"github.com/leetcode-go/assert"
 	"testing"
 )
 

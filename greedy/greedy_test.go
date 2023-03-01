@@ -1,7 +1,7 @@
 package greedy
 
 import (
-	"leetcode-go/assert"
+	"github.com/leetcode-go/assert"
 	"testing"
 )
 
@@ -53,6 +53,26 @@ func TestFindContentChildren(t *testing.T) {
 
 	for i := range g {
 		result := findContentChildren(g[i], s[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
+
+func TestRobotSim(t *testing.T) {
+	commands := [][]int{
+		{4, -1, 3},
+		{4, -1, 4, -2, 4},
+	}
+	obstacles := [][][]int{
+		{},
+		{{2, 4}},
+	}
+	actual := []int{
+		25,
+		65,
+	}
+
+	for i := range commands {
+		result := robotSim(commands[i], obstacles[i])
 		assert.Verify(t, i, result, actual[i])
 	}
 }

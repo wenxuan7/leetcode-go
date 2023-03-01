@@ -1,10 +1,10 @@
 package queue
 
 import (
-	"leetcode-go/assert"
+	"github.com/leetcode-go/assert"
 	"testing"
 )
-import . "leetcode-go/data"
+import . "github.com/leetcode-go/data"
 
 func TestLevelOrder(t *testing.T) {
 	data := []*TreeNode{

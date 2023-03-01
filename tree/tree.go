@@ -1,6 +1,6 @@
 package tree
 
-import . "leetcode-go/data"
+import . "github.com/leetcode-go/data"
 
 // inorderTraversal
 // 94. 二叉树的中序遍历
