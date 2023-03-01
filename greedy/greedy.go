@@ -123,3 +123,31 @@ func robotSim(commands []int, obstacles [][]int) int {
 
 	return ans
 }
+
+// canJump
+// 55. 跳跃游戏
+// https://leetcode.cn/problems/jump-game/
+func canJump(nums []int) bool {
+	if len(nums) < 1 {
+		return false
+	}
+
+	if len(nums) == 1 {
+		return true
+	}
+
+	max := 0
+
+	for i := 0; i < len(nums); i++ {
+		if i <= max {
+			value := i + nums[i]
+			if value > max {
+				max = value
+				if value >= len(nums)-1 {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
