@@ -20,3 +20,21 @@ func TestMySqrt(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestIsPerfectSquare(t *testing.T) {
+	num := []int{
+		16,
+		14,
+		9,
+	}
+	actual := []bool{
+		true,
+		false,
+		true,
+	}
+
+	for i := range num {
+		result := isPerfectSquare(num[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
