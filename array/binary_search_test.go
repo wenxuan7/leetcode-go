@@ -67,3 +67,26 @@ func TestSearch(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestSearchMatrix(t *testing.T) {
+	matrix := [][][]int{
+		{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}},
+		{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}},
+		{{1}},
+	}
+	target := []int{
+		3,
+		13,
+		1,
+	}
+	actual := []bool{
+		true,
+		false,
+		true,
+	}
+
+	for i := range matrix {
+		result := searchMatrix(matrix[i], target[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}

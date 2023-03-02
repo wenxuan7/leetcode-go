@@ -72,3 +72,39 @@ func search(nums []int, target int) int {
 
 	return -1
 }
+
+// searchMatrix
+// 74. 搜索二维矩阵
+// https://leetcode.cn/problems/search-a-2d-matrix/
+func searchMatrix(matrix [][]int, target int) bool {
+	if len(matrix) == 0 {
+		return false
+	}
+
+	l, r, mid := 0, len(matrix)-1, 0
+	for l < r {
+		mid = ((r - l + 1) >> 1) + l
+		if matrix[mid][0] == target {
+			return true
+		} else if matrix[mid][0] > target {
+			r = mid - 1
+		} else {
+			l = mid
+		}
+	}
+
+	row := l
+	l, r = 0, len(matrix[row])-1
+	for l <= r {
+		mid = ((r - l + 1) >> 1) + l
+		if matrix[row][mid] == target {
+			return true
+		} else if matrix[row][mid] > target {
+			r = mid - 1
+		} else {
+			l = mid + 1
+		}
+	}
+
+	return false
+}
