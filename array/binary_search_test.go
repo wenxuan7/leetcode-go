@@ -90,3 +90,21 @@ func TestSearchMatrix(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestFindMin(t *testing.T) {
+	nums := [][]int{
+		{3, 4, 5, 1, 2},
+		{4, 5, 6, 7, 0, 1, 2},
+		{11, 13, 15, 17},
+	}
+	actual := []int{
+		1,
+		0,
+		11,
+	}
+
+	for i := range nums {
+		result := findMin(nums[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}

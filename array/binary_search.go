@@ -108,3 +108,31 @@ func searchMatrix(matrix [][]int, target int) bool {
 
 	return false
 }
+
+// findMin
+// 153. 寻找旋转排序数组中的最小值
+// https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/
+func findMin(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+
+	l, r, mid, min := 0, len(nums)-1, 0, nums[0]
+	for l <= r {
+		mid = ((r - l) >> 1) + l
+
+		if nums[l] <= nums[mid] {
+			if nums[l] < min {
+				min = nums[l]
+			}
+			l = mid + 1
+		} else {
+			if nums[mid] < min {
+				min = nums[mid]
+			}
+			r = mid - 1
+		}
+	}
+
+	return min
+}
