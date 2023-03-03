@@ -24,3 +24,19 @@ func TestUniquePaths(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestUniquePathsWithObstacles(t *testing.T) {
+	obstacleGrid := [][][]int{
+		{{0, 0, 0}, {0, 1, 0}, {0, 0, 0}},
+		{{0, 1}, {0, 0}},
+	}
+	actual := []int{
+		2,
+		1,
+	}
+
+	for i := range obstacleGrid {
+		result := uniquePathsWithObstacles(obstacleGrid[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
