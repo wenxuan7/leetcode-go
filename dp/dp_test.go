@@ -40,3 +40,29 @@ func TestUniquePathsWithObstacles(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestLongestCommonSubsequence(t *testing.T) {
+	text1 := []string{
+		"abcde",
+		"abc",
+		"abc",
+		"bsbininm",
+	}
+	text2 := []string{
+		"ace",
+		"abc",
+		"def",
+		"jmjkbkjkv",
+	}
+	actual := []int{
+		3,
+		3,
+		0,
+		1,
+	}
+
+	for i := range text1 {
+		result := longestCommonSubsequence(text1[i], text2[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
