@@ -58,13 +58,13 @@ func moveZeroes(nums []int) {
 func climbStairs(n int) int {
 	if n < 1 {
 		return 0
-	} else if n == 1 {
-		return 1
-	} else if n == 2 {
-		return 2
 	}
 
 	dp := []int{1, 2}
+	if n < 3 {
+		return dp[n-1]
+	}
+
 	for i := 3; i <= n; i++ {
 		dp[0], dp[1] = dp[1], dp[0]+dp[1]
 	}
