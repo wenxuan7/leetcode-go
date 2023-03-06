@@ -66,3 +66,23 @@ func TestLongestCommonSubsequence(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestMinimumTotal(t *testing.T) {
+	triangle := [][][]int{
+		{{2}, {3, 4}, {6, 5, 7}, {4, 1, 8, 3}},
+		{{-10}},
+		{{-1}, {-2, -3}},
+		{{-1}, {2, 3}, {1, -1, -3}},
+	}
+	actual := []int{
+		11,
+		-10,
+		-4,
+		-1,
+	}
+
+	for i := range triangle {
+		result := minimumTotal(triangle[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}

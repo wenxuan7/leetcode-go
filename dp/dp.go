@@ -1,5 +1,9 @@
 package dp
 
+import (
+	"math"
+)
+
 // uniquePaths
 // 62. 不同路径
 // https://leetcode.cn/problems/unique-paths/
@@ -88,4 +92,42 @@ func longestCommonSubsequence(text1 string, text2 string) int {
 	}
 
 	return dp[m][n]
+}
+
+// minimumTotal
+// 120. 三角形最小路径和
+// https://leetcode.cn/problems/triangle/
+func minimumTotal(triangle [][]int) int {
+	if len(triangle) == 0 {
+		return 0
+	}
+
+	dp := make([]int, len(triangle))
+	dp[0] = triangle[0][0]
+	for i, nums := range triangle {
+		// 跳过第一行
+		if i == 0 {
+			continue
+		}
+
+		dp[i] = nums[i] + dp[i-1]
+		for j := i - 1; j > 0; j-- {
+			if dp[j-1] < dp[j] {
+				dp[j] = dp[j-1] + nums[j]
+			} else {
+				dp[j] = dp[j] + nums[j]
+			}
+		}
+
+		dp[0] = nums[0] + dp[0]
+	}
+
+	min := math.MaxInt
+	for _, num := range dp {
+		if num < min {
+			min = num
+		}
+	}
+
+	return min
 }
