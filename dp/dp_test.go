@@ -104,3 +104,21 @@ func TestMaxSubArray(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestMaxProduct(t *testing.T) {
+	nums := [][]int{
+		{2, 3, -2, 4},
+		{-2, 0, -1},
+		{-2, 3, -4},
+	}
+	actual := []int{
+		6,
+		0,
+		24,
+	}
+
+	for i := range nums {
+		result := maxProduct(nums[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
