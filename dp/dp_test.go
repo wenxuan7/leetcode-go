@@ -86,3 +86,21 @@ func TestMinimumTotal(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestMaxSubArray(t *testing.T) {
+	nums := [][]int{
+		{-2, 1, -3, 4, -1, 2, 1, -5, 4},
+		{1},
+		{5, 4, -1, 7, 8},
+	}
+	actual := []int{
+		6,
+		1,
+		23,
+	}
+
+	for i := range nums {
+		result := maxSubArray(nums[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
