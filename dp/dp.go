@@ -104,12 +104,9 @@ func minimumTotal(triangle [][]int) int {
 
 	dp := make([]int, len(triangle))
 	dp[0] = triangle[0][0]
-	for i, nums := range triangle {
-		// 跳过第一行
-		if i == 0 {
-			continue
-		}
 
+	for i := 1; i < len(triangle); i++ {
+		nums := triangle[i]
 		dp[i] = nums[i] + dp[i-1]
 		for j := i - 1; j > 0; j-- {
 			if dp[j-1] < dp[j] {
