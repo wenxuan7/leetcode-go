@@ -210,3 +210,33 @@ func coinChange(coins []int, amount int) int {
 		return dp[amount]
 	}
 }
+
+// rob
+// 198. 打家劫舍
+// https://leetcode.cn/problems/house-robber/
+func rob(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+
+	if len(nums) == 1 {
+		return nums[0]
+	}
+
+	// 第一个为本身不算进去
+	// 第二个为本身算进去
+	dp := make([][]int, len(nums))
+	dp[0] = []int{0, nums[0]}
+	dp[1] = []int{nums[0], nums[1]}
+
+	for i := 2; i < len(nums); i++ {
+		dp[i] = make([]int, 2)
+		dp[i][0], dp[i][1] = max(dp[i-1][1], dp[i-1][0]), max(dp[i-2][1]+nums[i], dp[i-2][0]+nums[i])
+	}
+
+	if dp[len(nums)-1][0] > dp[len(nums)-1][1] {
+		return dp[len(nums)-1][0]
+	} else {
+		return dp[len(nums)-1][1]
+	}
+}

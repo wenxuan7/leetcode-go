@@ -145,3 +145,21 @@ func TestCoinChange(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestRob(t *testing.T) {
+	nums := [][]int{
+		{1, 2, 3, 1},
+		{2, 7, 9, 3, 1},
+		{2, 1, 1, 2},
+	}
+	actual := []int{
+		4,
+		12,
+		4,
+	}
+
+	for i := range nums {
+		result := rob(nums[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
