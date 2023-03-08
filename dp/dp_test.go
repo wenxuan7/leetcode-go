@@ -163,3 +163,21 @@ func TestRob(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestRob2(t *testing.T) {
+	nums := [][]int{
+		{2, 3, 2},
+		{1, 2, 3, 1},
+		{1, 2, 3, 1},
+	}
+	actual := []int{
+		3,
+		4,
+		4,
+	}
+
+	for i := range nums {
+		result := rob2(nums[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}

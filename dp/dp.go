@@ -240,3 +240,22 @@ func rob(nums []int) int {
 		return dp[len(nums)-1][1]
 	}
 }
+
+// rob2
+// 213. 打家劫舍 II
+// https://leetcode.cn/problems/house-robber-ii/description/
+func rob2(nums []int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+
+	if len(nums) == 1 {
+		return nums[0]
+	}
+
+	if len(nums) == 2 {
+		return max(nums[0], nums[1])
+	}
+
+	return max(rob(nums[1:]), rob(nums[:len(nums)-1]))
+}
