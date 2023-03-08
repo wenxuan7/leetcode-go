@@ -122,3 +122,26 @@ func TestMaxProduct(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestCoinChange(t *testing.T) {
+	coins := [][]int{
+		{1, 2, 5},
+		{2},
+		{1},
+	}
+	amount := []int{
+		11,
+		3,
+		0,
+	}
+	actual := []int{
+		3,
+		-1,
+		0,
+	}
+
+	for i := range coins {
+		result := coinChange(coins[i], amount[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
