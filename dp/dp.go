@@ -1,6 +1,7 @@
 package dp
 
 import (
+	"github.com/leetcode-go/tool"
 	"math"
 )
 
@@ -155,26 +156,12 @@ func maxProduct(nums []int) int {
 	maxF, minF, ans := nums[0], nums[0], nums[0]
 	for i := 1; i < len(nums); i++ {
 		mx, mn := maxF, minF
-		maxF = max(mx*nums[i], max(nums[i], mn*nums[i]))
-		minF = min(mx*nums[i], min(nums[i], mn*nums[i]))
-		ans = max(maxF, ans)
+		maxF = tool.Max(mx*nums[i], tool.Max(nums[i], mn*nums[i]))
+		minF = tool.Min(mx*nums[i], tool.Min(nums[i], mn*nums[i]))
+		ans = tool.Max(maxF, ans)
 	}
 
 	return ans
-}
-
-func max(x, y int) int {
-	if x > y {
-		return x
-	}
-	return y
-}
-
-func min(x, y int) int {
-	if x < y {
-		return x
-	}
-	return y
 }
 
 // coinChange
@@ -231,7 +218,7 @@ func rob(nums []int) int {
 
 	for i := 2; i < len(nums); i++ {
 		dp[i] = make([]int, 2)
-		dp[i][0], dp[i][1] = max(dp[i-1][1], dp[i-1][0]), max(dp[i-2][1]+nums[i], dp[i-2][0]+nums[i])
+		dp[i][0], dp[i][1] = tool.Max(dp[i-1][1], dp[i-1][0]), tool.Max(dp[i-2][1]+nums[i], dp[i-2][0]+nums[i])
 	}
 
 	if dp[len(nums)-1][0] > dp[len(nums)-1][1] {
@@ -254,8 +241,33 @@ func rob2(nums []int) int {
 	}
 
 	if len(nums) == 2 {
-		return max(nums[0], nums[1])
+		return tool.Max(nums[0], nums[1])
 	}
 
-	return max(rob(nums[1:]), rob(nums[:len(nums)-1]))
+	return tool.Max(rob(nums[1:]), rob(nums[:len(nums)-1]))
+}
+
+// maxProfit
+// 121. 买卖股票的最佳时机
+// https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/
+// dp[i] = max(dp[i-1], prices[i]-min)
+func maxProfit(prices []int) int {
+	l := len(prices)
+	if l == 0 {
+		return 0
+	}
+
+	min, dp := prices[0], make([]int, l)
+	dp[0] = 0
+	for i := 1; i < l; i++ {
+		if prices[i] < min {
+			min = prices[i]
+			dp[i] = dp[i-1]
+			continue
+		}
+
+		dp[i] = tool.Max(prices[i]-min, dp[i-1])
+	}
+
+	return dp[l-1]
 }

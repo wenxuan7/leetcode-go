@@ -1,5 +1,7 @@
 package stack
 
+import "github.com/leetcode-go/tool"
+
 // largestRectangleArea
 // 84. 柱状图中最大的矩形
 // https://leetcode.cn/problems/largest-rectangle-in-histogram/
@@ -58,7 +60,7 @@ func trap(height []int) (ans int) {
 			}
 			left := monoStack[top]
 			curWidth := i - left - 1
-			curHeight := min(height[left], h) - height[num]
+			curHeight := tool.Min(height[left], h) - height[num]
 			ans += curWidth * curHeight
 		}
 
@@ -66,11 +68,4 @@ func trap(height []int) (ans int) {
 		monoStack[top] = i
 	}
 	return
-}
-
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
 }
