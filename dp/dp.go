@@ -271,3 +271,20 @@ func maxProfit(prices []int) int {
 
 	return dp[l-1]
 }
+
+// maxProfitII
+// 122. 买卖股票的最佳时机 II
+// https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/
+func maxProfitII(prices []int) int {
+	l := len(prices)
+	if l == 0 {
+		return 0
+	}
+
+	dp := []int{0, -prices[0]}
+	for i := 1; i < l; i++ {
+		dp[0], dp[1] = tool.Max(dp[0], dp[1]+prices[i]), tool.Max(dp[1], dp[0]-prices[i])
+	}
+
+	return dp[0]
+}

@@ -197,3 +197,19 @@ func TestMaxProfit(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestMaxProfitII(t *testing.T) {
+	prices := [][]int{
+		{7, 1, 5, 3, 6, 4},
+		{1, 2, 3, 4, 5},
+	}
+	actual := []int{
+		7,
+		4,
+	}
+
+	for i := range prices {
+		result := maxProfitII(prices[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
