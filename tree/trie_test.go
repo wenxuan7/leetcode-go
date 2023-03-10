@@ -45,3 +45,23 @@ func TestTrie(t *testing.T) {
 		}
 	}
 }
+
+func TestFindWords(t *testing.T) {
+	board := [][][]byte{
+		{{'o', 'a', 'a', 'n'}, {'e', 't', 'a', 'e'}, {'i', 'h', 'k', 'r'}, {'i', 'f', 'l', 'v'}},
+		{{'a', 'b'}, {'c', 'd'}},
+	}
+	words := [][]string{
+		{"oath", "pea", "eat", "rain"},
+		{"abcb"},
+	}
+	actual := [][]string{
+		{"oath", "eat"},
+		{},
+	}
+
+	for i := range board {
+		result := findWords(board[i], words[i])
+		assert.VerifyArr(t, i, result, actual[i])
+	}
+}
