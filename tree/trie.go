@@ -51,7 +51,7 @@ func (t *Trie) Search(word string) bool {
 		curr = curr.letter[key]
 	}
 
-	return curr != nil && curr.isWord
+	return curr.isWord
 }
 
 func (t *Trie) StartsWith(prefix string) bool {
