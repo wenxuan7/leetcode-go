@@ -136,3 +136,73 @@ func (us *UnionSet) Union(x, y int) {
 func (us *UnionSet) GetCount() int {
 	return us.count
 }
+
+// solve
+// 130. 被围绕的区域
+// https://leetcode.cn/problems/surrounded-regions/
+func solve(board [][]byte) {
+	if len(board) == 0 {
+		return
+	}
+
+	m, n := len(board), len(board[0])
+	parent := make([]int, m*n+1)
+	xy := [][]int{
+		{1, 0},
+		{0, 1},
+		{-1, 0},
+		{0, -1},
+	}
+
+	var find func(x int) int
+	find = func(x int) int {
+		if parent[x] != x {
+			parent[x] = find(parent[x])
+		}
+		return parent[x]
+	}
+
+	union := func(start, end int) {
+		parent[find(start)] = find(end)
+	}
+
+	for i := 0; i < len(parent); i++ {
+		parent[i] = i
+	}
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if board[i][j] != 'O' {
+				continue
+			}
+
+			if i == 0 ||
+				j == 0 ||
+				i == m-1 ||
+				j == n-1 {
+				union(i*n+j, m*n)
+			}
+
+			for _, v := range xy {
+				newI, newJ := i+v[0], j+v[1]
+				if newI >= 0 &&
+					newI < m &&
+					newJ >= 0 &&
+					newJ < n &&
+					board[newI][newJ] == 'O' {
+					union(i*n+j, newI*n+newJ)
+				}
+			}
+		}
+	}
+
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if find(i*n+j) == find(m*n) {
+				board[i][j] = 'O'
+			} else {
+				board[i][j] = 'X'
+			}
+		}
+	}
+}

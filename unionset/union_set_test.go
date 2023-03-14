@@ -46,3 +46,33 @@ func TestNumIslands(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestSolve(t *testing.T) {
+	data := [][][]byte{
+		{
+			{'X', 'X', 'X', 'X'},
+			{'X', 'O', 'O', 'X'},
+			{'X', 'X', 'O', 'X'},
+			{'X', 'O', 'X', 'X'},
+		},
+		{
+			{'X'},
+		},
+	}
+	actual := [][][]byte{
+		{
+			{'X', 'X', 'X', 'X'},
+			{'X', 'X', 'X', 'X'},
+			{'X', 'X', 'X', 'X'},
+			{'X', 'O', 'X', 'X'},
+		},
+		{
+			{'X'},
+		},
+	}
+
+	for i := range data {
+		solve(data[i])
+		assert.Verify2Arr(t, i, data[i], actual[i])
+	}
+}
