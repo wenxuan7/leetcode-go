@@ -114,3 +114,33 @@ func updateBoard(board [][]byte, click []int) [][]byte {
 
 	return board
 }
+
+// solveSudoku
+// 37. 解数独
+// https://leetcode.cn/problems/sudoku-solver/
+// TODO 待实现
+func solveSudoku(board [][]byte) {
+	if len(board) == 0 {
+		return
+	}
+
+	m, n := len(board), len(board[0])
+	rows := make([]int, 9)
+	cols := make([]int, 9)
+	unit := make([]int, 9)
+	// 初始化
+	for i := 0; i < m; i++ {
+		for j := 0; j < n; j++ {
+			if board[i][j] == '.' {
+				continue
+			}
+
+			v := 1 << int(board[i][j]-'1')
+			unitI := i/3*3 + j/3
+			rows[i] |= v
+			cols[j] |= v
+			unit[unitI] |= v
+		}
+	}
+
+}
