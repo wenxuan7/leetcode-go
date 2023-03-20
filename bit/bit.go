@@ -20,3 +20,19 @@ func isPowerOfTwo(n int) bool {
 	}
 	return (n & (n - 1)) == 0
 }
+
+// reverseBits
+// 190. 颠倒二进制位
+// https://leetcode.cn/problems/reverse-bits/
+func reverseBits(num uint32) uint32 {
+	flagEnd, flagBegin, sum := uint32(1), uint32(1<<31), uint32(0)
+	for i := 0; i < 32; i++ {
+		if num&flagEnd == flagEnd {
+			sum += flagBegin
+		}
+		flagBegin >>= 1
+		flagEnd <<= 1
+	}
+
+	return sum
+}

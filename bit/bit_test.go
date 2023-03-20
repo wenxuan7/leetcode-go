@@ -44,3 +44,19 @@ func TestIsPowerOfTwo(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestReverseBits(t *testing.T) {
+	num := []uint32{
+		0b00000010100101000001111010011100,
+		0b11111111111111111111111111111101,
+	}
+	actual := []uint32{
+		964176192,
+		3221225471,
+	}
+
+	for i := range num {
+		result := reverseBits(num[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
