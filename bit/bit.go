@@ -10,3 +10,13 @@ func hammingWeight(num uint32) int {
 	}
 	return count
 }
+
+// isPowerOfTwo
+// 231. 2 的幂
+// https://leetcode.cn/problems/power-of-two/
+func isPowerOfTwo(n int) bool {
+	if n < 1 {
+		return false
+	}
+	return (n & (n - 1)) == 0
+}

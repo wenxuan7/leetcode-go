@@ -22,3 +22,25 @@ func TestHammingWeight(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestIsPowerOfTwo(t *testing.T) {
+	n := []int{
+		1,
+		16,
+		3,
+		4,
+		5,
+	}
+	actual := []bool{
+		true,
+		true,
+		false,
+		true,
+		false,
+	}
+
+	for i := range n {
+		result := isPowerOfTwo(n[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
