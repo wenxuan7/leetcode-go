@@ -36,3 +36,24 @@ func reverseBits(num uint32) uint32 {
 
 	return sum
 }
+
+// countBits
+// 338. 比特位计数
+// https://leetcode.cn/problems/counting-bits/
+func countBits(n int) []int {
+	if n < 1 {
+		return nil
+	}
+
+	ans := make([]int, n+1)
+	ans[0] = 0
+	highBit := 0
+
+	for i := 1; i < n+1; i++ {
+		if i&(i-1) == 0 {
+			highBit = i
+		}
+		ans[i] = ans[i-highBit] + 1
+	}
+	return ans
+}

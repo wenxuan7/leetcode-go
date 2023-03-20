@@ -60,3 +60,18 @@ func TestReverseBits(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestCountBits(t *testing.T) {
+	n := []int{
+		2,
+		5,
+	}
+	actual := [][]int{
+		{0, 1, 1},
+		{0, 1, 1, 2, 1, 2},
+	}
+	for i := range n {
+		result := countBits(n[i])
+		assert.VerifyArr(t, i, result, actual[i])
+	}
+}
