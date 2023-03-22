@@ -80,3 +80,23 @@ func TestFirstUniqChar(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestMyAtoi(t *testing.T) {
+	s := []string{
+		"42",
+		"   -42",
+		"4193 with words",
+		"words and 987",
+	}
+	actual := []int{
+		42,
+		-42,
+		4193,
+		0,
+	}
+
+	for i := range s {
+		result := myAtoi(s[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
