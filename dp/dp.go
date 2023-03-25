@@ -288,3 +288,22 @@ func maxProfitII(prices []int) int {
 
 	return dp[0]
 }
+
+// tribonacci
+// 1137. 第 N 个泰波那契数
+// https://leetcode.cn/problems/n-th-tribonacci-number/
+func tribonacci(n int) int {
+	if n < 0 {
+		return 0
+	}
+
+	dp := []int{0, 1, 1}
+	if n < 3 {
+		return dp[n]
+	}
+
+	for i := 3; i <= n; i++ {
+		dp[0], dp[1], dp[2] = dp[1], dp[2], dp[0]+dp[1]+dp[2]
+	}
+	return dp[2]
+}

@@ -213,3 +213,19 @@ func TestMaxProfitII(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestTribonacci(t *testing.T) {
+	n := []int{
+		4,
+		25,
+	}
+	actual := []int{
+		4,
+		1389537,
+	}
+
+	for i := range n {
+		result := tribonacci(n[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
