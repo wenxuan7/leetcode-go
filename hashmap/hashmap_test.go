@@ -1,6 +1,7 @@
 package hashmap
 
 import (
+	"github.com/leetcode-go/assert"
 	"testing"
 )
 
@@ -77,5 +78,23 @@ func verifyArr(t *testing.T, caseIndex int, result []int, actual []int) {
 			t.Fatalf("结果与实际值不同, caseIndex: %d, result: %d, actual: %d, i: %d",
 				caseIndex, result, actual, i)
 		}
+	}
+}
+
+func TestFindSubarrays(t *testing.T) {
+	nums := [][]int{
+		{4, 2, 4},
+		{1, 2, 3, 4, 5},
+		{0, 0, 0},
+	}
+	actual := []bool{
+		true,
+		false,
+		true,
+	}
+
+	for i := range nums {
+		result := findSubarrays(nums[i])
+		assert.Verify(t, i, result, actual[i])
 	}
 }

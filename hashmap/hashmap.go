@@ -59,3 +59,23 @@ func twoSum(nums []int, target int) []int {
 
 	return []int{}
 }
+
+// findSubarrays
+// 2395. 和相等的子数组
+// https://leetcode.cn/problems/find-subarrays-with-equal-sum/
+func findSubarrays(nums []int) bool {
+	if len(nums) < 3 {
+		return false
+	}
+
+	m := make(map[int]bool, len(nums))
+	for i := 0; i < len(nums)-1; i++ {
+		k := nums[i] + nums[i+1]
+		if m[k] {
+			return true
+		}
+		m[k] = true
+	}
+
+	return false
+}
