@@ -307,3 +307,32 @@ func tribonacci(n int) int {
 	}
 	return dp[2]
 }
+
+// countSubstrings
+// 1638. 统计只差一个字符的子串数目
+// https://leetcode.cn/problems/count-substrings-that-differ-by-one-character/
+func countSubstrings(s string, t string) int {
+	if len(s) == 0 || len(t) == 0 {
+		return 0
+	}
+
+	ans := 0
+	for i := 0; i < len(s); i++ {
+		for j := 0; j < len(t); j++ {
+			k := 0
+			df := 0
+			for ; i+k < len(s) && j+k < len(t); k++ {
+				if s[i+k] != t[j+k] {
+					df++
+				}
+				if df == 1 {
+					ans++
+				}
+				if df > 1 {
+					break
+				}
+			}
+		}
+	}
+	return ans
+}

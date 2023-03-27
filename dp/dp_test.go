@@ -229,3 +229,23 @@ func TestTribonacci(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestCountSubstrings(t *testing.T) {
+	s := []string{
+		"aba",
+		"ab",
+	}
+	tt := []string{
+		"baba",
+		"bb",
+	}
+	actual := []int{
+		6,
+		3,
+	}
+
+	for i := range s {
+		result := countSubstrings(s[i], tt[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
