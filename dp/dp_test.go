@@ -249,3 +249,21 @@ func TestCountSubstrings(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestFib(t *testing.T) {
+	n := []int{
+		2,
+		3,
+		4,
+	}
+	actual := []int{
+		1,
+		2,
+		3,
+	}
+
+	for i := range n {
+		result := fib(n[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}

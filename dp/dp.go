@@ -336,3 +336,22 @@ func countSubstrings(s string, t string) int {
 	}
 	return ans
 }
+
+// fib
+// 509. 斐波那契数
+// https://leetcode.cn/problems/fibonacci-number/
+func fib(n int) int {
+	if n < 1 {
+		return 0
+	}
+
+	dp := []int{0, 1}
+	if n < 2 {
+		return dp[n]
+	}
+
+	for i := 2; i <= n; i++ {
+		dp[0], dp[1] = dp[1], dp[0]+dp[1]
+	}
+	return dp[1]
+}
