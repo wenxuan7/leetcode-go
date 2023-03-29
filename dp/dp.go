@@ -1,6 +1,7 @@
 package dp
 
 import (
+	"fmt"
 	"github.com/leetcode-go/tool"
 	"math"
 )
@@ -354,4 +355,38 @@ func fib(n int) int {
 		dp[0], dp[1] = dp[1], dp[0]+dp[1]
 	}
 	return dp[1]
+}
+
+// countVowelStrings
+// 1641. 统计字典序元音字符串的数目
+// https://leetcode.cn/problems/count-sorted-vowel-strings/
+func countVowelStrings(n int) int {
+	switch n {
+	case 0:
+		return 0
+	case 1:
+		return 5
+	case 2:
+		return 15
+	}
+
+	dp0, dp1 := []int{1, 1, 1, 1, 1}, []int{1, 2, 3, 4, 5}
+	for i := 3; i <= n; i++ {
+		copy(dp0, dp1)
+
+		for j, _ := range dp1 {
+			temp := 0
+			for k := 0; k <= j; k++ {
+				temp += dp0[k]
+			}
+			dp1[j] = temp
+		}
+	}
+
+	ans := 0
+	fmt.Println(dp1)
+	for _, num := range dp1 {
+		ans += num
+	}
+	return ans
 }

@@ -267,3 +267,23 @@ func TestFib(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestCountVowelStrings(t *testing.T) {
+	n := []int{
+		0,
+		1,
+		2,
+		33,
+	}
+	actual := []int{
+		0,
+		5,
+		15,
+		66045,
+	}
+
+	for i := range n {
+		result := countVowelStrings(n[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
