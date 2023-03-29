@@ -1,7 +1,6 @@
 package dp
 
 import (
-	"fmt"
 	"github.com/leetcode-go/tool"
 	"math"
 )
@@ -384,7 +383,6 @@ func countVowelStrings(n int) int {
 	}
 
 	ans := 0
-	fmt.Println(dp1)
 	for _, num := range dp1 {
 		ans += num
 	}
