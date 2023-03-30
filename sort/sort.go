@@ -1,6 +1,9 @@
 package sort
 
-import . "github.com/leetcode-go/data"
+import (
+	. "github.com/leetcode-go/data"
+	"github.com/leetcode-go/tool"
+)
 
 // sortColors
 // 75. 颜色分类
@@ -50,4 +53,45 @@ func insertionSortList(head *ListNode) *ListNode {
 		curr = lastSorted.Next
 	}
 	return dummyHead.Next
+}
+
+// maxWidthOfVerticalArea
+// 1637. 两点之间不包含任何点的最宽垂直区域
+// https://leetcode.cn/problems/widest-vertical-area-between-two-points-containing-no-points/
+func maxWidthOfVerticalArea(points [][]int) int {
+	if len(points) < 2 {
+		return 0
+	}
+
+	var qSort func(nums [][]int, l, r int)
+	qSort = func(nums [][]int, l, r int) {
+		if l >= r {
+			return
+		}
+
+		flag, j := l, l+1
+		for i := j; i <= r; i++ {
+			if nums[i][0] < nums[flag][0] {
+				nums[j][0], nums[i][0] = nums[i][0], nums[j][0]
+				nums[j][1], nums[i][1] = nums[i][1], nums[j][1]
+				j++
+			}
+		}
+
+		nums[flag][0], nums[j-1][0] = nums[j-1][0], nums[flag][0]
+		nums[flag][1], nums[j-1][1] = nums[j-1][1], nums[flag][1]
+		flag = j - 1
+
+		qSort(nums, l, flag-1)
+		qSort(nums, flag+1, r)
+	}
+
+	qSort(points, 0, len(points)-1)
+
+	ans := 0
+	for i := 1; i < len(points); i++ {
+		ans = tool.Max(ans, points[i][0]-points[i-1][0])
+	}
+
+	return ans
 }
