@@ -5,6 +5,24 @@ import (
 	"testing"
 )
 
+func TestQSort(t *testing.T) {
+	nums := [][]int{
+		{6, 5, 4, 3, 2, 1},
+		{7, 8, 1, 5, 2, 3},
+		{1, 1, 1, 2, 2, 3, 4, 5},
+	}
+	actual := [][]int{
+		{1, 2, 3, 4, 5, 6},
+		{1, 2, 3, 5, 7, 8},
+		{1, 1, 1, 2, 2, 3, 4, 5},
+	}
+
+	for i := range nums {
+		qSort(nums[i], 0, len(nums[i])-1)
+		assert.VerifyArr(t, i, nums[i], actual[i])
+	}
+}
+
 func TestSortColors(t *testing.T) {
 	nums := [][]int{
 		{2, 0, 2, 1, 1, 0},
@@ -34,23 +52,5 @@ func TestMaxWidthOfVerticalArea(t *testing.T) {
 	for i := range points {
 		result := maxWidthOfVerticalArea(points[i])
 		assert.Verify(t, i, result, actual[i])
-	}
-}
-
-func TestQSort(t *testing.T) {
-	nums := [][]int{
-		{6, 5, 4, 3, 2, 1},
-		{7, 8, 1, 5, 2, 3},
-		{1, 1, 1, 2, 2, 3, 4, 5},
-	}
-	actual := [][]int{
-		{1, 2, 3, 4, 5, 6},
-		{1, 2, 3, 5, 7, 8},
-		{1, 1, 1, 2, 2, 3, 4, 5},
-	}
-
-	for i := range nums {
-		qSort(nums[i], 0, len(nums[i])-1)
-		assert.VerifyArr(t, i, nums[i], actual[i])
 	}
 }
