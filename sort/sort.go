@@ -5,6 +5,29 @@ import (
 	"github.com/leetcode-go/tool"
 )
 
+// qSort
+// 快排
+func qSort(nums []int, l, r int) {
+	if l >= r {
+		return
+	}
+
+	flag, j := l, l+1
+	for i := j; i <= r; i++ {
+		if nums[i] < nums[flag] {
+			nums[j], nums[i] = nums[i], nums[j]
+			j++
+		}
+	}
+
+	// 与j 的前一个交换 j有可能为r+1
+	nums[flag], nums[j-1] = nums[j-1], nums[flag]
+	flag = j - 1
+
+	qSort(nums, l, flag-1)
+	qSort(nums, flag+1, r)
+}
+
 // sortColors
 // 75. 颜色分类
 // https://leetcode.cn/problems/sort-colors/
