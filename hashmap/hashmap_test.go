@@ -98,3 +98,23 @@ func TestFindSubarrays(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestArithmeticTriplets(t *testing.T) {
+	nums := [][]int{
+		{0, 1, 4, 6, 7, 10},
+		{4, 5, 6, 7, 8, 9},
+	}
+	diff := []int{
+		3,
+		2,
+	}
+	actual := []int{
+		2,
+		2,
+	}
+
+	for i := range nums {
+		result := arithmeticTriplets(nums[i], diff[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}

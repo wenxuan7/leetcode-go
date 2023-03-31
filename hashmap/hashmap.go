@@ -1,5 +1,7 @@
 package hashmap
 
+import "github.com/leetcode-go/tool"
+
 // isAnagram
 // 242. 有效的字母异位词
 // https://leetcode.cn/problems/valid-anagram/
@@ -78,4 +80,32 @@ func findSubarrays(nums []int) bool {
 	}
 
 	return false
+}
+
+// arithmeticTriplets
+// 2367. 算术三元组的数目
+// https://leetcode.cn/problems/number-of-arithmetic-triplets/
+func arithmeticTriplets(nums []int, diff int) int {
+	if len(nums) == 0 {
+		return 0
+	}
+
+	ans := 0
+	for i, j, k := 0, 1, 2; i < len(nums)-2; i++ {
+		j = tool.Max(i+1, j)
+		for ; j < len(nums)-1 && nums[j]-nums[i] < diff; j++ {
+		}
+		if j >= len(nums)-1 || nums[j]-nums[i] > diff {
+			continue
+		}
+
+		k = tool.Max(j+1, k)
+		for ; k < len(nums) && nums[k]-nums[j] < diff; k++ {
+		}
+		if k < len(nums) && nums[k]-nums[j] == diff {
+			ans++
+		}
+	}
+
+	return ans
 }
