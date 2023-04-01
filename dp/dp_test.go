@@ -287,3 +287,19 @@ func TestCountVowelStrings(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestMinCostClimbingStairs(t *testing.T) {
+	cost := [][]int{
+		{10, 15, 20},
+		{1, 100, 1, 1, 1, 100, 1, 1, 100, 1},
+	}
+	actual := []int{
+		15,
+		6,
+	}
+
+	for i := range cost {
+		result := minCostClimbingStairs(cost[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
