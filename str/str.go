@@ -1,6 +1,9 @@
 package str
 
-import "math"
+import (
+	"math"
+	"strings"
+)
 
 // toLowerCase
 // 709. 转换成小写字母
@@ -146,4 +149,82 @@ func myAtoi(s string) int {
 	}
 
 	return sign * result
+}
+
+// maskPII
+// 831. 隐藏个人信息
+// https://leetcode.cn/problems/masking-personal-information/
+func maskPII(s string) string {
+	if len(s) == 0 {
+		return ""
+	}
+
+	mailFlagI := strings.IndexByte(s, '@')
+	if mailFlagI >= 0 {
+		// 名字 和 域名 部分的大写英文字母应当转换成小写英文字母。
+		// 名字 中间的字母（即，除第一个和最后一个字母外）必须用 5 个 "*****" 替换。
+		bs := make([]byte, 7+len(s)-mailFlagI)
+		for i, j := mailFlagI, 7; i < len(s); i, j = i+1, j+1 {
+			b := s[i]
+			if b >= 'A' && b <= 'Z' {
+				bs[j] = b - 'A' + 'a'
+			} else {
+				bs[j] = b
+			}
+		}
+
+		for i := 1; i < 6; i++ {
+			bs[i] = '*'
+		}
+
+		s0 := s[0]
+		if s0 >= 'A' && s0 <= 'Z' {
+			bs[0] = s0 - 'A' + 'a'
+		} else {
+			bs[0] = s0
+		}
+
+		s1 := s[mailFlagI-1]
+		if s1 >= 'A' && s1 <= 'Z' {
+			bs[6] = s1 - 'A' + 'a'
+		} else {
+			bs[6] = s1
+		}
+
+		return string(bs)
+	}
+
+	// ***-***-XXXX 如果国家代码为 0 位数字
+	// +*-***-***-XXXX 如果国家代码为 1 位数字
+	// +**-***-***-XXXX 如果国家代码为 2 位数字
+	// +***-***-***-XXXX 如果国家代码为 3 位数字
+	numCount := 0
+	last4, j := []byte{0, 0, 0, 0}, 3
+	for i := len(s) - 1; i > -1; i-- {
+		b := s[i]
+		if b >= '0' && b <= '9' {
+			numCount++
+			if j > -1 {
+				last4[j] = b
+				j--
+			}
+		}
+	}
+
+	var ans []byte
+	switch numCount {
+	case 10:
+		ans = []byte{'*', '*', '*', '-', '*', '*', '*', '-', 'X', 'X', 'X', 'X'}
+	case 11:
+		ans = []byte{'+', '*', '-', '*', '*', '*', '-', '*', '*', '*', '-', 'X', 'X', 'X', 'X'}
+	case 12:
+		ans = []byte{'+', '*', '*', '-', '*', '*', '*', '-', '*', '*', '*', '-', 'X', 'X', 'X', 'X'}
+	case 13:
+		ans = []byte{'+', '*', '*', '*', '-', '*', '*', '*', '-', '*', '*', '*', '-', 'X', 'X', 'X', 'X'}
+	default:
+		ans = []byte{'*', '*', '*', '-', '*', '*', '*', '-', 'X', 'X', 'X', 'X'}
+	}
+
+	copy(ans[len(ans)-4:], last4)
+	return string(ans)
 }

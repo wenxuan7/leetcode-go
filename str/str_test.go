@@ -100,3 +100,23 @@ func TestMyAtoi(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestMaskPII(t *testing.T) {
+	s := []string{
+		"LeetCode@LeetCode.com",
+		"AB@qq.com",
+		"1(234)567-890",
+		"86-(10)12345678",
+	}
+	actual := []string{
+		"l*****e@leetcode.com",
+		"a*****b@qq.com",
+		"***-***-7890",
+		"+**-***-***-5678",
+	}
+
+	for i := range s {
+		result := maskPII(s[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
