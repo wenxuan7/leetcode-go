@@ -303,3 +303,21 @@ func TestMinCostClimbingStairs(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestDeleteAndEarn(t *testing.T) {
+	nums := [][]int{
+		{3, 4, 2},
+		{2, 2, 3, 3, 3, 4},
+		{1, 1, 1, 2, 4, 5, 5, 5, 6},
+	}
+	actual := []int{
+		6,
+		9,
+		18,
+	}
+
+	for i := range nums {
+		result := deleteAndEarn(nums[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}

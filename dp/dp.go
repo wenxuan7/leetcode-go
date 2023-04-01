@@ -1,6 +1,7 @@
 package dp
 
 import (
+	"github.com/leetcode-go/sort"
 	"github.com/leetcode-go/tool"
 	"math"
 )
@@ -396,4 +397,24 @@ func minCostClimbingStairs(cost []int) int {
 		dp[i] = tool.Min(dp[i-1]+cost[i-1], dp[i-2]+cost[i-2])
 	}
 	return dp[n]
+}
+
+// deleteAndEarn
+// 740. 删除并获得点数
+// https://leetcode.cn/problems/delete-and-earn/
+func deleteAndEarn(nums []int) (ans int) {
+	sort.Quick(nums, 0, len(nums)-1)
+	sum := []int{nums[0]}
+	for i := 1; i < len(nums); i++ {
+		if val := nums[i]; val == nums[i-1]+1 {
+			sum = append(sum, val)
+		} else if val == nums[i-1] {
+			sum[len(sum)-1] += val
+		} else {
+			ans += rob(sum)
+			sum = []int{val}
+		}
+	}
+	ans += rob(sum)
+	return
 }

@@ -18,7 +18,7 @@ func TestQSort(t *testing.T) {
 	}
 
 	for i := range nums {
-		qSort(nums[i], 0, len(nums[i])-1)
+		Quick(nums[i], 0, len(nums[i])-1)
 		assert.VerifyArr(t, i, nums[i], actual[i])
 	}
 }

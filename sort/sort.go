@@ -5,9 +5,9 @@ import (
 	"github.com/leetcode-go/tool"
 )
 
-// qSort
+// Quick
 // 快排
-func qSort(nums []int, l, r int) {
+func Quick(nums []int, l, r int) {
 	if l >= r {
 		return
 	}
@@ -24,8 +24,8 @@ func qSort(nums []int, l, r int) {
 	nums[flag], nums[j-1] = nums[j-1], nums[flag]
 	flag = j - 1
 
-	qSort(nums, l, flag-1)
-	qSort(nums, flag+1, r)
+	Quick(nums, l, flag-1)
+	Quick(nums, flag+1, r)
 }
 
 // sortColors
