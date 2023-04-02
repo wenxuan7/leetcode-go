@@ -233,3 +233,24 @@ func TestJump(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestPrevPermOpt1(t *testing.T) {
+	arr := [][]int{
+		{3, 2, 1},
+		{1, 1, 5},
+		{1, 9, 4, 6, 7},
+		{3, 1, 1, 3},
+	}
+
+	actual := [][]int{
+		{3, 1, 2},
+		{1, 1, 5},
+		{1, 7, 4, 6, 9},
+		{1, 3, 1, 3},
+	}
+
+	for i := range arr {
+		result := prevPermOpt1(arr[i])
+		assert.VerifyArr(t, i, result, actual[i])
+	}
+}

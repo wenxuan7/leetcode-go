@@ -175,3 +175,24 @@ func jump(nums []int) int {
 	}
 	return ans
 }
+
+// prevPermOpt1
+// 1053. 交换一次的先前排列
+// https://leetcode.cn/problems/previous-permutation-with-one-swap/
+func prevPermOpt1(arr []int) []int {
+	if len(arr) < 2 {
+		return arr
+	}
+
+	for i := len(arr) - 2; i > -1; i-- {
+		if arr[i] > arr[i+1] {
+			j := len(arr) - 1
+			for arr[j] >= arr[i] || arr[j] == arr[j-1] {
+				j--
+			}
+			arr[i], arr[j] = arr[j], arr[i]
+			break
+		}
+	}
+	return arr
+}
