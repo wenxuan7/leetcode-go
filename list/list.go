@@ -52,6 +52,7 @@ func (mll *MyLinkedList) AddAtTail(val int) {
 }
 
 func (mll *MyLinkedList) AddAtIndex(index int, val int) {
+	// 索引从-1开始 判断i == index -1 这样能处理特殊情况 index==0, index==len-1
 	for curr, i := mll.head, -1; curr != mll.tail && i < mll.len; curr, i = curr.next, i+1 {
 		if i == index-1 {
 			pre, next := curr, curr.next
