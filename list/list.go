@@ -52,10 +52,32 @@ func (mll *MyLinkedList) AddAtTail(val int) {
 }
 
 func (mll *MyLinkedList) AddAtIndex(index int, val int) {
+	if index > mll.len/2 {
+		mll.addAtIndexFromTail(index, val)
+	} else {
+		mll.addAtIndexFromHead(index, val)
+	}
+}
+
+func (mll *MyLinkedList) addAtIndexFromHead(index int, val int) {
 	// 索引从-1开始 判断i == index -1 这样能处理特殊情况 index==0, index==len-1
 	for curr, i := mll.head, -1; curr != mll.tail && i < mll.len; curr, i = curr.next, i+1 {
 		if i == index-1 {
 			pre, next := curr, curr.next
+			newNode := &DNode{Val: val, prev: pre, next: next}
+			pre.next = newNode
+			next.prev = newNode
+			mll.len += 1
+			break
+		}
+	}
+}
+
+func (mll *MyLinkedList) addAtIndexFromTail(index int, val int) {
+	// 索引从len开始 判断i == index + 1 这样能处理特殊情况 index==0, index==len-1
+	for curr, i := mll.tail, mll.len; curr != mll.head && i >= 0; curr, i = curr.prev, i-1 {
+		if i == index {
+			pre, next := curr.prev, curr
 			newNode := &DNode{Val: val, prev: pre, next: next}
 			pre.next = newNode
 			next.prev = newNode
