@@ -1,6 +1,7 @@
 package stack
 
 import (
+	"github.com/leetcode-go/assert"
 	"testing"
 )
 
@@ -68,5 +69,21 @@ func TestMinStack(t *testing.T) {
 				actualI++
 			}
 		}
+	}
+}
+
+func TestEvalRPN(t *testing.T) {
+	s := [][]string{
+		{"2", "1", "+", "3", "*"},
+		{"4", "13", "5", "/", "+"},
+	}
+	actual := []int{
+		9,
+		6,
+	}
+
+	for i := range s {
+		result := evalRPN(s[i])
+		assert.Verify(t, i, result, actual[i])
 	}
 }

@@ -2,6 +2,7 @@ package stack
 
 import (
 	"container/list"
+	"strconv"
 )
 
 // isValid
@@ -95,4 +96,37 @@ func (ms *MinStack) Top() int {
 
 func (ms *MinStack) GetMin() int {
 	return ms.min
+}
+
+// evalRPN
+// 150. 逆波兰表达式求值
+// https://leetcode.cn/problems/evaluate-reverse-polish-notation/
+func evalRPN(tokens []string) int {
+	stack := make([]int, len(tokens))
+	top := -1
+	for _, token := range tokens {
+		switch token {
+		case "+":
+			stack[top-1] = stack[top] + stack[top-1]
+			top--
+		case "-":
+			stack[top-1] = stack[top-1] - stack[top]
+			top--
+		case "*":
+			stack[top-1] = stack[top] * stack[top-1]
+			top--
+		case "/":
+			stack[top-1] = stack[top-1] / stack[top]
+			top--
+		default:
+			atoi, err := strconv.Atoi(token)
+			if err != nil {
+				panic(err)
+			}
+
+			top++
+			stack[top] = atoi
+		}
+	}
+	return stack[top]
 }
