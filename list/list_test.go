@@ -160,3 +160,6 @@ func TestMergeTwoLists(t *testing.T) {
 		assert.VerifyList(t, i, result, assert.GenerateList(actual[i]))
 	}
 }
+
+// TODO 待实现测试
+func TestMyLinkedList(t *testing.T) {}

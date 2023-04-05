@@ -5,6 +5,79 @@ import (
 	. "github.com/leetcode-go/data"
 )
 
+// MyLinkedList
+// 707. 设计链表
+// https://leetcode.cn/problems/design-linked-list/
+type MyLinkedList struct {
+	head, tail *DNode
+	len        int
+}
+type DNode struct {
+	prev, next *DNode
+	Val        int
+}
+
+func NewMyLinkedList() MyLinkedList {
+	head, tail := DNode{}, DNode{}
+	head.next, tail.prev = &tail, &head
+	return MyLinkedList{head: &head, tail: &tail}
+}
+
+func (mll *MyLinkedList) Get(index int) int {
+	for curr, i := mll.head.next, 0; curr != mll.tail && i < mll.len; curr, i = curr.next, i+1 {
+		if i == index {
+			return curr.Val
+		}
+	}
+
+	return -1
+}
+
+func (mll *MyLinkedList) AddAtHead(val int) {
+	newDNode := &DNode{Val: val}
+	mll.head.next.prev = newDNode
+	newDNode.next = mll.head.next
+	mll.head.next = newDNode
+	newDNode.prev = mll.head
+	mll.len += 1
+}
+
+func (mll *MyLinkedList) AddAtTail(val int) {
+	newDNode := &DNode{Val: val}
+	mll.tail.prev.next = newDNode
+	newDNode.prev = mll.tail.prev
+	mll.tail.prev = newDNode
+	newDNode.next = mll.tail
+	mll.len += 1
+}
+
+func (mll *MyLinkedList) AddAtIndex(index int, val int) {
+	for curr, i := mll.head, -1; curr != mll.tail && i < mll.len; curr, i = curr.next, i+1 {
+		if i == index-1 {
+			pre, next := curr, curr.next
+			newNode := &DNode{Val: val, prev: pre, next: next}
+			pre.next = newNode
+			next.prev = newNode
+			mll.len += 1
+			break
+		}
+	}
+}
+
+func (mll *MyLinkedList) DeleteAtIndex(index int) {
+	for curr, i := mll.head.next, 0; curr != mll.tail && i < mll.len; curr, i = curr.next, i+1 {
+		if i == index {
+			pre, next := curr.prev, curr.next
+			pre.next = next
+			next.prev = pre
+			curr.next = nil
+			curr.prev = nil
+			mll.len -= 1
+			break
+		}
+	}
+}
+
 // reverseList
 // 206. 反转链表
 // https://leetcode.cn/problems/reverse-linked-list/
