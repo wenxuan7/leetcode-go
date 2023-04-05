@@ -1,7 +1,6 @@
 package list
 
 import (
-	"container/list"
 	. "github.com/leetcode-go/data"
 )
 
@@ -182,33 +181,41 @@ func detectCycle(head *ListNode) *ListNode {
 // reverseKGroup
 // 25. K 个一组翻转链表
 // https://leetcode.cn/problems/reverse-nodes-in-k-group/
+// 思路: 分组
 func reverseKGroup(head *ListNode, k int) *ListNode {
-	if head == nil || k < 2 {
+	if head == nil || head.Next == nil {
 		return head
 	}
 
-	ls, curr := list.New(), head
+	curr := &ListNode{Next: head}
 	for i := 0; i < k; i++ {
+		curr = curr.Next
 		if curr == nil {
 			return head
 		}
-
-		ls.PushBack(curr)
-		curr = curr.Next
 	}
 
-	groupNext := reverseKGroup(curr, k)
-	pre := groupNext
+	nextGroupHead := reverseKGroup(curr.Next, k)
+	nHead, nTail := reverseGroup(head, curr)
+	nTail.Next = nextGroupHead
+	return nHead
+}
 
-	for ls.Len() > 0 {
-		element := ls.Front()
-		front := element.Value.(*ListNode)
-		front.Next = pre
-		pre = front
-		ls.Remove(element)
+func reverseGroup(head, tail *ListNode) (nHead, nTail *ListNode) {
+	if head == nil {
+		return
 	}
 
-	return pre
+	// 注意 这里提前存一下 不然会被覆盖掉
+	taiNext := tail.Next
+	for curr := head; curr != taiNext; {
+		temp := curr.Next
+		curr.Next = nHead
+		nHead = curr
+		curr = temp
+	}
+	nTail = head
+	return
 }
 
 // mergeTwoLists
