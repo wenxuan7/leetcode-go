@@ -130,3 +130,44 @@ func evalRPN(tokens []string) int {
 	}
 	return stack[top]
 }
+
+// 224. 基本计算器
+// https://leetcode.cn/problems/basic-calculator/
+// 去括号初始前面补+
+// -(1+(4+5+2)-3)+(6+8)
+func calculate(s string) int {
+	ans := 0
+	sign := 1
+	op := make([]int, len(s))
+	op[0] = 1
+	top := 0
+
+	for i := 0; i < len(s); {
+		switch s[i] {
+		case ' ':
+			i++
+			continue
+		case '+':
+			sign = 1 * op[top]
+			i++
+		case '-':
+			sign = -1 * op[top]
+			i++
+		case '(':
+			top++
+			op[top] = sign
+			i++
+		case ')':
+			top--
+			i++
+		default:
+			num := 0
+			for ; i < len(s) && '0' <= s[i] && s[i] <= '9'; i++ {
+				num = num*10 + int(s[i]-'0')
+			}
+			ans += num * sign
+		}
+	}
+
+	return ans
+}

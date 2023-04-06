@@ -87,3 +87,23 @@ func TestEvalRPN(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestCalculate(t *testing.T) {
+	s := []string{
+		"1 + 1",
+		" 2-1 + 2 ",
+		"(1+(4+5+2)-3)+(6+8)",
+		"2147483647",
+	}
+	actual := []int{
+		2,
+		3,
+		23,
+		2147483647,
+	}
+
+	for i := range s {
+		result := calculate(s[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
