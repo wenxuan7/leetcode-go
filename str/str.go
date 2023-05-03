@@ -228,3 +228,29 @@ func maskPII(s string) string {
 	copy(ans[len(ans)-4:], last4)
 	return string(ans)
 }
+
+// isValid
+// 1003. 检查替换后的词是否有效
+// https://leetcode.cn/problems/check-if-word-is-valid-after-substitutions/
+func isValid(s string) bool {
+	if len(s)%3 != 0 {
+		return false
+	}
+
+	stk := make([]byte, len(s))
+	top := -1
+	for i := range s {
+		b := s[i]
+		top++
+		stk[top] = b
+
+		if top >= 2 &&
+			stk[top] == 'c' &&
+			stk[top-1] == 'b' &&
+			stk[top-2] == 'a' {
+			top -= 3
+		}
+	}
+
+	return top == -1
+}

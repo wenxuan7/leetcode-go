@@ -120,3 +120,21 @@ func TestMaskPII(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestIsValid(t *testing.T) {
+	str := []string{
+		"aabcbc",
+		"abcabcababcc",
+		"abccba",
+	}
+	actual := []bool{
+		true,
+		true,
+		false,
+	}
+
+	for i := range str {
+		result := isValid(str[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
