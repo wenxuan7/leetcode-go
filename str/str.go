@@ -1,6 +1,7 @@
 package str
 
 import (
+	"bytes"
 	"math"
 	"strings"
 )
@@ -253,4 +254,49 @@ func isValid(s string) bool {
 	}
 
 	return top == -1
+}
+
+// gcdOfStrings
+// 1071. 字符串的最大公因子
+// https://leetcode.cn/problems/greatest-common-divisor-of-strings
+// TODO 其他优秀的解法没有思考过
+func gcdOfStrings(str1 string, str2 string) string {
+	if len(str1) > len(str2) {
+		return gcdOfStrings(str2, str1)
+	}
+
+	bs1, bs2 := []byte(str1), []byte(str2)
+	for i := len(bs1); i >= 1; i-- {
+		if len(str1)%i != 0 ||
+			len(str2)%i != 0 {
+			continue
+		}
+
+		common := bs1[0:i]
+
+		flag := true
+		for j := 0; j < len(bs1)/i; j++ {
+			temp := bs1[j*i : (j+1)*i]
+
+			if !bytes.Equal(common, temp) {
+				flag = false
+				break
+			}
+		}
+		if !flag {
+			continue
+		}
+		for k := 0; k < len(bs2)/i; k++ {
+			temp := bs2[k*i : (k+1)*i]
+
+			if !bytes.Equal(common, temp) {
+				flag = false
+				break
+			}
+		}
+		if flag {
+			return string(common)
+		}
+	}
+	return ""
 }

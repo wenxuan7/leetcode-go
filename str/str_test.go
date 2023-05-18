@@ -138,3 +138,25 @@ func TestIsValid(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestGcdOfStrings(t *testing.T) {
+	str1 := []string{
+		"ABCABC",
+		"ABABAB",
+		"LEET",
+	}
+	str2 := []string{
+		"ABC",
+		"AB",
+		"CODE",
+	}
+	actual := []string{
+		"ABC",
+		"AB",
+		"",
+	}
+	for i := range str1 {
+		result := gcdOfStrings(str1[i], str2[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}
