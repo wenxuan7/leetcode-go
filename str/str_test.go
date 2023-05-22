@@ -160,3 +160,17 @@ func TestGcdOfStrings(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestReplaceSpace(t *testing.T) {
+	s := []string{
+		"We are happy.",
+	}
+	actual := []string{
+		"We%20are%20happy.",
+	}
+
+	for i := range s {
+		result := replaceSpace(s[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}

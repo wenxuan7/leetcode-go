@@ -300,3 +300,24 @@ func gcdOfStrings(str1 string, str2 string) string {
 	}
 	return ""
 }
+
+// replaceSpace
+// 剑指 Offer 05. 替换空格
+// https://leetcode.cn/problems/ti-huan-kong-ge-lcof
+func replaceSpace(s string) string {
+	if s == "" {
+		return ""
+	}
+
+	bs := make([]byte, 0, len(s)*3)
+	for i := range s {
+		b := s[i]
+		if b != ' ' {
+			bs = append(bs, b)
+		} else {
+			bs = append(bs, "%20"...)
+		}
+	}
+
+	return string(bs)
+}
