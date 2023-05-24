@@ -174,3 +174,23 @@ func TestReplaceSpace(t *testing.T) {
 		assert.Verify(t, i, result, actual[i])
 	}
 }
+
+func TestReplaceWords(t *testing.T) {
+	dictionary := [][]string{
+		{"cat", "bat", "rat"},
+		{"a", "b", "c"},
+	}
+	sentence := []string{
+		"the cattle was rattled by the battery",
+		"aadsfasf absbs bbab cadsfafs",
+	}
+	actual := []string{
+		"the cat was rat by the bat",
+		"a a b c",
+	}
+
+	for i := range dictionary {
+		result := replaceWords(dictionary[i], sentence[i])
+		assert.Verify(t, i, result, actual[i])
+	}
+}

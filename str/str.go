@@ -321,3 +321,50 @@ func replaceSpace(s string) string {
 
 	return string(bs)
 }
+
+// replaceWords
+// 648. 单词替换
+// https://leetcode.cn/problems/replace-words/description/
+func replaceWords(dictionary []string, sentence string) string {
+	qSortStr(dictionary, 0, len(dictionary)-1)
+	split := strings.Split(sentence, " ")
+	ans := make([]string, 0, len(split))
+	for _, s := range split {
+		flag := false
+		for _, dic := range dictionary {
+			if len(dic) > len(s) {
+				break
+			}
+
+			if s[:len(dic)] == dic {
+				ans = append(ans, dic)
+				flag = true
+				break
+			}
+		}
+		if !flag {
+			ans = append(ans, s)
+		}
+	}
+
+	return strings.Join(ans, " ")
+}
+
+func qSortStr(s []string, l, r int) {
+	if l >= r {
+		return
+	}
+
+	flag, index := l, l+1
+	for i := l + 1; i <= r; i++ {
+		if len(s[i]) < len(s[flag]) {
+			s[index], s[i] = s[i], s[index]
+			index++
+		}
+	}
+
+	s[flag], s[index-1] = s[index-1], s[flag]
+	flag = index - 1
+	qSortStr(s, l, flag-1)
+	qSortStr(s, flag+1, r)
+}
