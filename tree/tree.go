@@ -130,3 +130,53 @@ func recursiveLevelOrder(root *Node, level int, ans *[][]int) {
 		recursiveLevelOrder(child, level+1, ans)
 	}
 }
+
+// delNodes
+// 1110. 删点成林
+// https://leetcode.cn/problems/delete-nodes-and-return-forest/
+func delNodes(root *TreeNode, deleted []int) []*TreeNode {
+	if root == nil || len(deleted) == 0 {
+		return []*TreeNode{root}
+	}
+
+	m := make(map[*TreeNode]bool, 1001)
+	q := make([]*TreeNode, 0, 1001)
+	deletedM := make([]bool, 1001)
+	for _, v := range deleted {
+		deletedM[v] = true
+	}
+
+	preRoot := &TreeNode{Val: 0, Left: root}
+	deletedM[0] = true
+	q = append(q, preRoot)
+	for len(q) > 0 {
+		l := len(q)
+		for i := 0; i < l; i++ {
+			if q[i].Left != nil {
+				q = append(q, q[i].Left)
+				if deletedM[q[i].Left.Val] {
+					q[i].Left = nil
+				} else if deletedM[q[i].Val] {
+					m[q[i].Left] = true
+				}
+			}
+			if q[i].Right != nil {
+				q = append(q, q[i].Right)
+				if deletedM[q[i].Right.Val] {
+					q[i].Right = nil
+				} else if deletedM[q[i].Val] {
+					m[q[i].Right] = true
+				}
+			}
+		}
+		q = q[l:]
+	}
+
+	ans := make([]*TreeNode, 0)
+	for k := range m {
+		if m[k] {
+			ans = append(ans, k)
+		}
+	}
+	return ans
+}
