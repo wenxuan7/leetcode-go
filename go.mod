@@ -1,3 +1,3 @@
-module github.com/leetcode-go
+module github.com/leetcode
 
-go 1.21
+go 1.22
