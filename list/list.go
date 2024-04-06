@@ -8,22 +8,25 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	preH := &ListNode{}
 	pre := preH
 	multi := 0
-	for l1 != nil || l2 != nil {
+	for {
 		sum := multi
+		breakFlag := true
 		if l1 != nil {
 			sum += l1.Val
 			l1 = l1.Next
+			breakFlag = false
 		}
 		if l2 != nil {
 			sum += l2.Val
 			l2 = l2.Next
+			breakFlag = false
+		}
+		if breakFlag {
+			break
 		}
 
 		sum, multi = sum%10, sum/10
 		curr := &ListNode{Val: sum, Next: nil}
-		if preH.Next == nil {
-			preH.Next = curr
-		}
 		pre.Next = curr
 		pre = curr
 	}
