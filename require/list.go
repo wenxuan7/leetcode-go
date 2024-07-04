@@ -5,32 +5,25 @@ import (
 	"testing"
 )
 
-// HListNodeFromArray 从array生成链表，返回头节点
 func HListNodeFromArray(nums ...int) *ListNode {
 	if len(nums) == 0 {
 		return nil
 	}
 
-	preHead := &ListNode{}
-	pre := preHead
-	var curr *ListNode
-
-	for i := range nums {
-		curr = &ListNode{Val: nums[i], Next: nil}
+	preH := &ListNode{}
+	pre := preH
+	for _, v := range nums {
+		curr := &ListNode{Val: v}
 		pre.Next = curr
 		pre = curr
 	}
-	return preHead.Next
+	return preH.Next
 }
 
-// EqualListNode 校验两个链表的全部节点值是否相等
-func EqualListNode(t *testing.T, caseIndex int, result *ListNode, actual *ListNode) {
-	if result == nil && actual == nil {
-		return
-	}
-	str1, str2 := result.String(), actual.String()
-	if str1 != str2 {
-		t.Fatalf("结果与实际不相符\ncaseIndex: %d\nresult: %s\nactual: %s",
-			caseIndex, str1, str2)
+func EqualListNode(t *testing.T, i int, result, actual *ListNode) {
+	resultStr, actualStr := result.String(), actual.String()
+	if resultStr != actualStr {
+		t.Fatalf("结果错误, case: %d, result: %s, actual: %s",
+			i, resultStr, actualStr)
 	}
 }
