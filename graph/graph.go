@@ -112,3 +112,57 @@ func resetA(board [][]byte, r, c int) {
 	resetA(board, r, c-1)
 	resetA(board, r, c+1)
 }
+
+// minMutation 433. 最小基因变化
+// https://leetcode.cn/problems/minimum-genetic-mutation/description/?envType=study-plan-v2&envId=top-interview-150
+func minMutation(startGene string, endGene string, bank []string) int {
+	if startGene == endGene {
+		return 0
+	}
+	if len(bank) == 0 {
+		return -1
+	}
+	appeared := make(map[int]bool, len(bank))
+	q := make([]string, 0, len(bank))
+	ret := 0
+	q = append(q, startGene)
+
+	for len(q) > 0 {
+		size := len(q)
+		for _, s := range q {
+			if s == endGene {
+				return ret
+			}
+			for _, num := range next(s, bank) {
+				if !appeared[num] {
+					q = append(q, bank[num])
+					appeared[num] = true
+				}
+			}
+		}
+		// 出队列
+		q = q[size:]
+		ret++
+	}
+	return -1
+}
+
+// next 返回bank中与s相差只有一个字符的索引
+func next(s string, bank []string) []int {
+	ans := make([]int, 0, len(bank))
+	for i, curr := range bank {
+		cnt := 0
+		for j := range s {
+			if cnt > 1 {
+				break
+			}
+			if s[j] != curr[j] {
+				cnt++
+			}
+		}
+		if cnt == 1 {
+			ans = append(ans, i)
+		}
+	}
+	return ans
+}

@@ -59,3 +59,23 @@ func TestSolve(t *testing.T) {
 		require.Equal2D(t, i, board, actual[i])
 	}
 }
+
+func TestMinMutation(t *testing.T) {
+	dataStart := []string{
+		"AACCGGTT",
+	}
+	dataEnd := []string{
+		"AAACGGTA",
+	}
+	dataBank := [][]string{
+		{"AACCGGTA", "AACCGCTA", "AAACGGTA"},
+	}
+	actual := []int{
+		2,
+	}
+
+	for i := range dataStart {
+		ret := minMutation(dataStart[i], dataEnd[i], dataBank[i])
+		require.EqualN(t, i, ret, actual[i])
+	}
+}
