@@ -1,7 +1,7 @@
 package str
 
 import (
-	"github.com/leetcode/require"
+	"github.com/wenxuan7/leetcode/require"
 	"testing"
 )
 

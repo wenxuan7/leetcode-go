@@ -1,8 +1,8 @@
 package list
 
 import (
-	. "github.com/leetcode/data"
-	"github.com/leetcode/require"
+	. "github.com/wenxuan7/leetcode/data"
+	"github.com/wenxuan7/leetcode/require"
 	"testing"
 )
 

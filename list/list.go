@@ -1,6 +1,6 @@
 package list
 
-import . "github.com/leetcode/data"
+import . "github.com/wenxuan7/leetcode/data"
 
 // 2. 两数相加
 // addTwoNumbers https://leetcode.cn/problems/add-two-numbers/description/

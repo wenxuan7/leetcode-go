@@ -1,7 +1,7 @@
 package require
 
 import (
-	. "github.com/leetcode/data"
+	. "github.com/wenxuan7/leetcode/data"
 	"testing"
 )
 
