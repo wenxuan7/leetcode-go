@@ -30,3 +30,32 @@ func TestNumIslands(t *testing.T) {
 		require.EqualN(t, i, ret, actual[i])
 	}
 }
+
+func TestSolve(t *testing.T) {
+	data := [][][]byte{
+		{
+			{'O', 'O'},
+			{'O', 'O'},
+		},
+		{
+			{'X', 'O', 'X'},
+			{'X', 'O', 'X'},
+			{'X', 'O', 'X'},
+		},
+	}
+	actual := [][][]byte{
+		{
+			{'O', 'O'},
+			{'O', 'O'},
+		},
+		{
+			{'X', 'O', 'X'},
+			{'X', 'O', 'X'},
+			{'X', 'O', 'X'},
+		},
+	}
+	for i, board := range data {
+		solve(board)
+		require.Equal2D(t, i, board, actual[i])
+	}
+}
