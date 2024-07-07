@@ -25,7 +25,7 @@ func TestFindMedianSortedArrays(t *testing.T) {
 
 	for i := range actual {
 		result := findMedianSortedArrays(data1[i], data2[i])
-		EqualFloat64 := require.EqualNumber[float64]
+		EqualFloat64 := require.EqualN[float64]
 		EqualFloat64(t, i, result, actual[i])
 	}
 }

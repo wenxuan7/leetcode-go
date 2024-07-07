@@ -27,6 +27,6 @@ func TestNumIslands(t *testing.T) {
 
 	for i, grid := range data {
 		ret := numIslands(grid)
-		require.EqualNumber(t, i, ret, actual[i])
+		require.EqualN(t, i, ret, actual[i])
 	}
 }
