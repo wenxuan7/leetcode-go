@@ -79,3 +79,31 @@ func TestMinMutation(t *testing.T) {
 		require.EqualN(t, i, ret, actual[i])
 	}
 }
+
+func TestLadderLength(t *testing.T) {
+	dataStart := []string{
+		"hit",
+		"hbo",
+		"hit",
+	}
+	dataEnd := []string{
+		"cog",
+		"qbx",
+		"cog",
+	}
+	dataWords := [][]string{
+		{"hot", "dot", "dog", "lot", "log", "cog"},
+		{"abo", "hco", "hbw", "ado", "abq", "hcd", "hcj", "hww", "qbq", "qby", "qbz", "qbx", "qbw"},
+		{"hot", "dot", "dog", "lot", "log"},
+	}
+	actual := []int{
+		5,
+		4,
+		0,
+	}
+
+	for i := range dataStart {
+		ret := ladderLength(dataStart[i], dataEnd[i], dataWords[i])
+		require.EqualN(t, i, ret, actual[i])
+	}
+}

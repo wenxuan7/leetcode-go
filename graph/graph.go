@@ -151,6 +151,9 @@ func minMutation(startGene string, endGene string, bank []string) int {
 func next(s string, bank []string) []int {
 	ans := make([]int, 0, len(bank))
 	for i, curr := range bank {
+		if curr == s {
+			continue
+		}
 		cnt := 0
 		for j := range s {
 			if cnt > 1 {
@@ -165,4 +168,53 @@ func next(s string, bank []string) []int {
 		}
 	}
 	return ans
+}
+
+// ladderLength 127. 单词接龙
+// https://leetcode.cn/problems/word-ladder/description/?envType=study-plan-v2&envId=top-interview-150
+func ladderLength(beginWord string, endWord string, wordList []string) int {
+	if beginWord == endWord {
+		return 0
+	}
+	if len(wordList) == 0 {
+		return 0
+	}
+	graph := make(map[int][]int, len(wordList))
+	graph[len(wordList)] = next(beginWord, wordList)
+	if len(graph[len(wordList)]) == 0 {
+		return 0
+	}
+	endAppeared := -1
+	for i, word := range wordList {
+		if word == endWord {
+			endAppeared = i
+		}
+		graph[i] = next(word, wordList)
+	}
+	if endAppeared == -1 {
+		return 0
+	}
+	appeared := make(map[int]bool, len(wordList))
+	q := make([]int, 0, len(wordList))
+	ret := 1
+	q = append(q, len(wordList))
+
+	for len(q) > 0 {
+		size := len(q)
+		for _, idx := range q {
+			if idx == endAppeared {
+				return ret
+			}
+			for _, num := range graph[idx] {
+				if !appeared[num] {
+					q = append(q, num)
+					appeared[num] = true
+				}
+			}
+		}
+		// 出队列
+		q = q[size:]
+		ret++
+	}
+	return 0
 }
