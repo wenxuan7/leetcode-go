@@ -109,3 +109,67 @@ func (wd *WordDictionary) Search(word string) bool {
 	}
 	return cur.end
 }
+
+// BoardLetter 212. 单词搜索 II
+// https://leetcode.cn/problems/word-search-ii/submissions/545376905/?envType=study-plan-v2&envId=top-interview-150
+type BoardLetter struct {
+	children []*BoardLetter
+	word     string
+}
+
+func (bl *BoardLetter) Insert(word string) {
+	cur := bl
+	idx := 0
+	for i := 0; i < len(word); i++ {
+		idx = int(word[i]) - 'a'
+		if cur.children[idx] == nil {
+			cur.children[idx] = &BoardLetter{children: make([]*BoardLetter, 26)}
+		}
+		cur = cur.children[idx]
+	}
+	cur.word = word
+}
+
+func findWords(board [][]byte, words []string) []string {
+	root := &BoardLetter{children: make([]*BoardLetter, 26)}
+	for _, word := range words {
+		root.Insert(word)
+	}
+
+	appeared := make(map[string]bool, len(words))
+	var dfs func(i, j int, root *BoardLetter)
+	dfs = func(i, j int, root *BoardLetter) {
+		if i < 0 || i >= len(board) || j < 0 || j >= len(board[i]) {
+			return
+		}
+		if board[i][j] == '.' {
+			return
+		}
+
+		idx := board[i][j] - 'a'
+		if root.children[idx] == nil {
+			return
+		}
+		if root.children[idx].word != "" && !appeared[root.children[idx].word] {
+			appeared[root.children[idx].word] = true
+		}
+
+		board[i][j] = '.'
+		dfs(i+1, j, root.children[idx])
+		dfs(i, j+1, root.children[idx])
+		dfs(i, j-1, root.children[idx])
+		dfs(i-1, j, root.children[idx])
+		board[i][j] = 'a' + idx
+	}
+	for i := 0; i < len(board); i++ {
+		for j := 0; j < len(board[i]); j++ {
+			dfs(i, j, root)
+		}
+	}
+
+	ret := make([]string, 0, len(words))
+	for word := range appeared {
+		ret = append(ret, word)
+	}
+	return ret
+}
