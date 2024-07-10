@@ -140,3 +140,42 @@ func generateParenthesis(n int) []string {
 	dfs(0, 0)
 	return ret
 }
+
+// exist 79. 单词搜索
+// https://leetcode.cn/problems/word-search/description/?envType=study-plan-v2&envId=top-interview-150
+func exist(board [][]byte, word string) bool {
+	var dfs func(r, c, i int) bool
+	dfs = func(r, c, i int) bool {
+		if i == len(word) {
+			return true
+		}
+		if r < 0 ||
+			r >= len(board) ||
+			c < 0 ||
+			c >= len(board[0]) ||
+			board[r][c] == '.' ||
+			board[r][c] != word[i] {
+			return false
+		}
+
+		var b byte
+		b, board[r][c] = board[r][c], '.'
+		flag := dfs(r+1, c, i+1) ||
+			dfs(r, c+1, i+1) ||
+			dfs(r-1, c, i+1) ||
+			dfs(r, c-1, i+1)
+		board[r][c] = b
+		return flag
+	}
+	for r, row := range board {
+		for c := range row {
+			if board[r][c] != word[0] {
+				continue
+			}
+			if dfs(r, c, 0) {
+				return true
+			}
+		}
+	}
+	return false
+}
