@@ -110,3 +110,33 @@ func combinationSum(candidates []int, target int) [][]int {
 	dfs(0)
 	return ans
 }
+
+// generateParenthesis 22. 括号生成
+// https://leetcode.cn/problems/generate-parentheses/description/?envType=study-plan-v2&envId=top-interview-150
+func generateParenthesis(n int) []string {
+	dp := make([]byte, 0, n*2)
+	ret := make([]string, 0, n*2-1)
+
+	var dfs func(l, r int)
+	dfs = func(l, r int) {
+		if l == n && r == n {
+			cp := make([]byte, len(dp))
+			copy(cp, dp)
+			ret = append(ret, string(cp))
+			return
+		}
+
+		if l < n {
+			dp = append(dp, '(')
+			dfs(l+1, r)
+			dp = dp[:len(dp)-1]
+		}
+		if r < l {
+			dp = append(dp, ')')
+			dfs(l, r+1)
+			dp = dp[:len(dp)-1]
+		}
+	}
+	dfs(0, 0)
+	return ret
+}
