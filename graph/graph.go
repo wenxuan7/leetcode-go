@@ -218,3 +218,33 @@ func ladderLength(beginWord string, endWord string, wordList []string) int {
 	}
 	return 0
 }
+
+type Node struct {
+	Val       int
+	Neighbors []*Node
+}
+
+// cloneGraph 133. 克隆图
+// https://leetcode.cn/problems/clone-graph/description/?envType=study-plan-v2&envId=top-interview-150
+func cloneGraph(node *Node) *Node {
+	appeared := map[*Node]*Node{}
+	var cp func(node *Node) *Node
+	cp = func(node *Node) *Node {
+		if node == nil {
+			return node
+		}
+
+		if _, ok := appeared[node]; ok {
+			return appeared[node]
+		}
+
+		cloneNode := &Node{node.Val, []*Node{}}
+		appeared[node] = cloneNode
+
+		for _, n := range node.Neighbors {
+			cloneNode.Neighbors = append(cloneNode.Neighbors, cp(n))
+		}
+		return cloneNode
+	}
+	return cp(node)
+}
