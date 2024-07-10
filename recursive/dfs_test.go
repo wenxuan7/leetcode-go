@@ -33,3 +33,16 @@ func TestGenerateParenthesis(t *testing.T) {
 
 	}
 }
+
+func TestTotalNQueens(t *testing.T) {
+	data := []int{
+		4,
+	}
+	actual := []int{
+		2,
+	}
+	for i := range data {
+		ret := totalNQueens(data[i])
+		require.EqualN(t, i, ret, actual[i])
+	}
+}
