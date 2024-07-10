@@ -60,3 +60,53 @@ func permute(nums []int) [][]int {
 	dfs()
 	return ans
 }
+
+// combinationSum 39. 组合总和
+// https://leetcode.cn/problems/combination-sum/description/?envType=study-plan-v2&envId=top-interview-150
+func combinationSum(candidates []int, target int) [][]int {
+	sum, endCnt, l := 0, 0, len(candidates)
+	ans := make([][]int, 0)
+	dp := make([]int, 0, l)
+	dpCnt := make([]int, 0, l)
+
+	var dfs func(start int)
+	dfs = func(start int) {
+		if sum > target {
+			return
+		}
+		if sum == target {
+			cp := make([]int, 0, endCnt)
+			for i, v := range dp {
+				for j := 0; j < dpCnt[i]; j++ {
+					cp = append(cp, v)
+				}
+			}
+			ans = append(ans, cp)
+			return
+		}
+		if start >= l {
+			return
+		}
+
+		for i := start; i < l; i++ {
+			num := candidates[i]
+			if num > target-sum {
+				continue
+			}
+			for cnt := (target - sum) / num; cnt > 0; cnt-- {
+				dp = append(dp, num)
+				dpCnt = append(dpCnt, cnt)
+				sum += num * cnt
+				endCnt += cnt
+				dfs(i + 1)
+				endCnt -= cnt
+				sum -= num * cnt
+				dpCnt = dpCnt[:len(dpCnt)-1]
+				dp = dp[:len(dp)-1]
+			}
+		}
+	}
+
+	dfs(0)
+	return ans
+}
