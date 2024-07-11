@@ -14,5 +14,5 @@ func searchInsert(nums []int, target int) int {
 			r = mid
 		}
 	}
-	return r + 1
+	return l
 }
