@@ -58,3 +58,13 @@ func hammingWeight(num int) int {
 	}
 	return ans
 }
+
+// 136. 只出现一次的数字
+// https://leetcode.cn/problems/single-number/?envType=study-plan-v2&envId=top-interview-150
+func singleNumber(nums []int) int {
+	ans := nums[0]
+	for i := 1; i < len(nums); i++ {
+		ans ^= nums[i]
+	}
+	return ans
+}
