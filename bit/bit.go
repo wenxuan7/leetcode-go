@@ -47,3 +47,14 @@ func reverseBits(num uint32) uint32 {
 	}
 	return ans
 }
+
+// 191. 位1的个数
+// https://leetcode.cn/problems/number-of-1-bits/description/?envType=study-plan-v2&envId=top-interview-150
+func hammingWeight(num int) int {
+	ans := 0
+	for i := 0; i < 31; i++ {
+		ans += num & 1
+		num >>= 1
+	}
+	return ans
+}
