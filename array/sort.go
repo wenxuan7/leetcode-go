@@ -35,7 +35,7 @@ func quickSort(arr []int) {
 	}
 
 	// 随机pivot处理 并且将值放置0下标处
-	moveRandomToZero(arr)
+	moveRandomToFirst(arr)
 	pivot, slow := 0, 1
 	for fast := slow; fast < len(arr); fast++ {
 		if arr[fast] < arr[pivot] {
@@ -49,7 +49,7 @@ func quickSort(arr []int) {
 	quickSort(arr[slow:])
 }
 
-func moveRandomToZero(arr []int) {
+func moveRandomToFirst(arr []int) {
 	n := rand.IntN(len(arr))
 	arr[0], arr[n] = arr[n], arr[0]
 }
