@@ -1,6 +1,9 @@
 package array
 
-import "math/rand/v2"
+import (
+	"math/rand/v2"
+	"slices"
+)
 
 // mergeSort 归并排序
 func mergeSort(arr []int) []int {
@@ -52,4 +55,34 @@ func quickSort(arr []int) {
 func moveRandomToFirst(arr []int) {
 	n := rand.IntN(len(arr))
 	arr[0], arr[n] = arr[n], arr[0]
+}
+
+// countingSort 计数排序
+func countingSort(arr []int) []int {
+	n := len(arr)
+	if n <= 1 {
+		return arr
+	}
+
+	mn, mx := slices.Min(arr), slices.Max(arr)
+	cnt := mx - mn + 1
+	cntArr := make([]int, cnt)
+
+	for _, v := range arr {
+		cntArr[v-mn] += 1
+	}
+
+	// 前缀和处理 确定位置 保证重复元素在原数组的相对顺序
+	for i := 1; i < cnt; i++ {
+		cntArr[i] += cntArr[i-1]
+	}
+	res := make([]int, n)
+	cur := 0
+	for i := len(arr) - 1; i >= 0; i-- {
+		cur = arr[i]
+		cntArr[cur-mn]--
+		res[cntArr[cur-mn]] = cur
+	}
+
+	return res
 }
