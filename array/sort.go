@@ -77,11 +77,12 @@ func countingSort(arr []int) []int {
 		cntArr[i] += cntArr[i-1]
 	}
 	res := make([]int, n)
-	cur := 0
+	cur, idx := 0, 0
 	for i := len(arr) - 1; i >= 0; i-- {
 		cur = arr[i]
-		cntArr[cur-mn]--
-		res[cntArr[cur-mn]] = cur
+		idx = cur - mn
+		cntArr[idx]--
+		res[cntArr[idx]] = cur
 	}
 
 	return res
