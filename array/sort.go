@@ -87,3 +87,31 @@ func countingSort(arr []int) []int {
 
 	return res
 }
+
+// bucketSort 桶排序
+func bucketSort(arr []int, bucketSize int) []int {
+	n := len(arr)
+	mn, mx := slices.Min(arr), slices.Max(arr)
+	// 这里计算桶数量
+	// 原来应该是 (mx-mn+1-1)/bucketSize + 1
+	bucketCnt := (mx-mn)/bucketSize + 1
+
+	buckets := make([][]int, bucketCnt)
+	for i := 0; i < bucketCnt; i++ {
+		buckets[i] = make([]int, 0)
+	}
+
+	idx := 0
+	for _, v := range arr {
+		idx = (v - mn) / bucketSize
+		buckets[idx] = append(buckets[idx], v)
+	}
+	for _, bucket := range buckets {
+		quickSort(bucket)
+	}
+	res := make([]int, 0, n)
+	for _, bucket := range buckets {
+		res = append(res, bucket...)
+	}
+	return res
+}
