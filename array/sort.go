@@ -88,9 +88,56 @@ func countingSort(arr []int) []int {
 	return res
 }
 
+// radixSort 基数排序
+func radixSort(arr []int) []int {
+	n := len(arr)
+	if n <= 1 {
+		return arr
+	}
+
+	mx := slices.Max(arr)
+	exp := 1
+	for mx/exp > 0 {
+		arr = countingSortByDigit(arr, exp)
+		exp *= 10
+	}
+	return arr
+}
+
+func countingSortByDigit(arr []int, exp int) []int {
+	n := len(arr)
+	res := make([]int, n)
+	count := make([]int, 10) // 基数为 10
+
+	// 统计每个数字出现的次数
+	idx := 0
+	for i := 0; i < n; i++ {
+		idx = (arr[i] / exp) % 10
+		count[idx]++
+	}
+
+	// 转换为累加和，用于确定元素位置
+	for i := 1; i < 10; i++ {
+		count[i] += count[i-1]
+	}
+
+	// 从后往前遍历数组，保证稳定性
+	for i := n - 1; i >= 0; i-- {
+		idx = (arr[i] / exp) % 10
+		count[idx]--
+		res[count[idx]] = arr[i]
+	}
+
+	return res
+}
+
 // bucketSort 桶排序
 func bucketSort(arr []int, bucketSize int) []int {
 	n := len(arr)
+	if n <= 1 {
+		return arr
+	}
+
 	mn, mx := slices.Min(arr), slices.Max(arr)
 	// 这里计算桶数量
 	// 原来应该是 (mx-mn+1-1)/bucketSize + 1
