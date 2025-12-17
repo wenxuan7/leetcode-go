@@ -1,4 +1,4 @@
-package list
+package alg
 
 // ListNode 链表节点
 type ListNode struct {
