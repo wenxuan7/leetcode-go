@@ -21,7 +21,7 @@ func (fw Fenwick) Sum(i int) int {
 }
 
 func (fw Fenwick) RangeSum(l, r int) int {
-	if l > r || r < 1 || l > len(fw)-1 {
+	if l > r || l < 1 || r > len(fw)-1 {
 		return 0
 	}
 	return fw.Sum(r) - fw.Sum(l-1)
