@@ -14,7 +14,7 @@ func (fw Fenwick) Sum(i int) int {
 		return 0
 	}
 	sum := 0
-	for j := i; j < len(fw); j += j & -j {
+	for j := i; j > 0; j -= j & -j {
 		sum += fw[j]
 	}
 	return sum
