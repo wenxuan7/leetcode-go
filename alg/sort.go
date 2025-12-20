@@ -1,6 +1,9 @@
 package alg
 
-import "math/rand/v2"
+import (
+	"math/rand/v2"
+	"slices"
+)
 
 // MergeSort 合并排序
 func MergeSort(arr []int) []int {
@@ -79,10 +82,10 @@ func CountingSort(arr []int) []int {
 	for r := len(arr) - 1; r >= 0; r-- {
 		num = arr[r]
 		sub = num - mn
-		idx = cnt[sub]
+		idx = cnt[sub] - 1
 
-		cnt[sub] = idx - 1
-		res[idx-1] = num
+		cnt[sub] = idx
+		res[idx] = num
 	}
 	return res
 }
@@ -119,5 +122,38 @@ func BucketSort(arr []int, bucketSize int) []int {
 
 // RadixSort 基数排序
 func RadixSort(arr []int) []int {
-	return nil
+	if len(arr) < 2 {
+		return arr
+	}
+
+	mx := slices.Max(arr)
+	res := arr
+
+	for exp := 1; mx/exp > 0; exp *= 10 {
+		res = radixSort(res, exp)
+	}
+	return res
+}
+
+func radixSort(arr []int, exp int) []int {
+	cnt := make([]int, 10)
+	for _, num := range arr {
+		cnt[(num/exp)%10]++
+	}
+
+	for i := 1; i < 10; i++ {
+		cnt[i] += cnt[i-1]
+	}
+
+	res := make([]int, len(arr))
+	idx, num, cntIdx := 0, 0, 0
+	for r := len(arr) - 1; r >= 0; r-- {
+		num = arr[r]
+		cntIdx = (num / exp) % 10
+		idx = cnt[cntIdx] - 1
+
+		cnt[cntIdx] = idx
+		res[idx] = num
+	}
+	return res
 }

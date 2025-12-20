@@ -19,6 +19,9 @@ func TestSort(t *testing.T) {
 		bucket := BucketSort(nums, 5)
 		t.Log("bucket:", bucket)
 
+		radix := RadixSort(nums)
+		t.Log("radix:", radix)
+
 		QuickSort(nums)
 		t.Log("quick:", nums)
 	}
