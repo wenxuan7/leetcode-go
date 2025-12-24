@@ -4,6 +4,9 @@ package alg
 type Fenwick []int
 
 func (fw Fenwick) Add(k, v int) {
+	if k < 1 || k > len(fw)-1 {
+		return
+	}
 	for i := k; i < len(fw); i += i & -i {
 		fw[i] += v
 	}
@@ -21,7 +24,9 @@ func (fw Fenwick) Sum(i int) int {
 }
 
 func (fw Fenwick) RangeSum(l, r int) int {
-	if l > r || l < 1 || r > len(fw)-1 {
+	if l > r ||
+		l < 1 || l > len(fw)-1 ||
+		r < 1 || r > len(fw)-1 {
 		return 0
 	}
 	return fw.Sum(r) - fw.Sum(l-1)
